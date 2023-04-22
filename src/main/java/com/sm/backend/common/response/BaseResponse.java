@@ -2,12 +2,6 @@ package com.sm.backend.common.response;
 
 import java.time.LocalDateTime;
 
-/*
- {"name":"sample", "address":"Seoul", "phone":"010-1234-1234"}
-
- {"code": 200,  "msg":"success", "result":{"name":"sample", "address":"Seoul", "phone":"010-1234-1234"}}
- */
-
 public class BaseResponse<T> {
 
     private String code;
