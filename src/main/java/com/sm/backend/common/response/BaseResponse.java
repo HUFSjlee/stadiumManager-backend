@@ -1,7 +1,10 @@
 package com.sm.backend.common.response;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class BaseResponse<T> {
 
     private String code;
@@ -12,6 +15,11 @@ public class BaseResponse<T> {
     public static <T> BaseResponse<T> success(T t) {
         return new BaseResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDefaultMessage(), t, LocalDateTime.now());
     }
+
+    public static <T> BaseResponse<T> success() {
+        return new BaseResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDefaultMessage(), null, LocalDateTime.now());
+    }
+
 
     public BaseResponse(String code, String msg, T result, LocalDateTime timestamp) {
         this.code = code;

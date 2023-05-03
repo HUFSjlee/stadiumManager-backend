@@ -1,1 +1,32 @@
+spring:
+  h2:
+    console:
+      enabled: true # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
+      path: /h2-console # H2 Console의 Path
 
+
+  # Database Setting Info (Database를 H2로 사용하기 위해 H2연결 정보 입력)
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # jpa설정
+  jpa:
+    hibernate: # hibernate 사용 설정
+      ddl-auto: create #create, alter, drop, truncate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    defer-datasource-initialization: true
+
+
+# 로그 레벨 설정
+logging:
+  level:
+    # hibernate 가 남기는 모든 로그가 debug모드로 설정
+    # jpa hibernate가 생성하는 sql이 로거를 통해서 찍히도록 하는 설정
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정

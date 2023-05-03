@@ -4,14 +4,16 @@ import com.sm.backend.common.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "sm_stadium")
+@Table(name = "stadium")
 public class Stadium extends BaseEntity {
 
     @Id
@@ -22,15 +24,27 @@ public class Stadium extends BaseEntity {
     @Column(name = "stadium_name")
     private String name;
 
-    @Column(name = "stadium_address")
+    @Column(name = "address")
     private String address;
 
     @Column(name = "stadium_size")
     private int size;
 
-    @Column(name = "stadium_minimum_people")
-    private int minimumPeople;
+    @Column(name = "stadium_minimum_person")
+    private int minimumPerson;
 
-    @Column(name = "stadium_maximum_people")
-    private int maximumPeople;
+    @Column(name = "stadium_maximum_person")
+    private int maximumPerson;
+
+    @Column(name = "parking_available")
+    private boolean parkingAvailable;
+
+    @Column(name = "shower_available")
+    private boolean showerAvailable;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "active")
+    private boolean active;
 }
