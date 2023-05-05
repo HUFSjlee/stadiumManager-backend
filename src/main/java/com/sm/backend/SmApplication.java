@@ -18,7 +18,7 @@ public class SmApplication {
 
     /**
      * 1. ERD 수정  v
-     * 2. ERD 에 맞게 Stadium(Entity) 처럼 Entities 만들기
+     * 2. ERD 에 맞게 Stadium(Entity) 처럼 Entities 만들기 v
      *
      * 3. StadiumAdminController -> 조회(페이징, Paging -> 검색조건을 고려해야 함), 수정(put), 상세, 삭제
      *    - 20개 이상 데이터를 넣어두거나, 생성해두고 -> 조회
