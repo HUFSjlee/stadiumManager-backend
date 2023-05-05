@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -24,16 +25,16 @@ public class Stadium extends BaseEntity {
     @Column(name = "stadium_name")
     private String name;
 
+    @Column(name = "size")
+    private int size;
+
     @Column(name = "address")
     private String address;
 
-    @Column(name = "stadium_size")
-    private int size;
-
-    @Column(name = "stadium_minimum_person")
+    @Column(name = "minumum_perssonel")
     private int minimumPerson;
 
-    @Column(name = "stadium_maximum_person")
+    @Column(name = "maximum_perssonel")
     private int maximumPerson;
 
     @Column(name = "parking_available")
@@ -43,8 +44,32 @@ public class Stadium extends BaseEntity {
     private boolean showerAvailable;
 
     @Column(name = "description")
-    private String description;
+    private String descripton;
+
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
+
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
 
     @Column(name = "active")
     private boolean active;
+
+    @Column(name = "del")
+    private boolean del;
+
+    public void update(String name, int size, String address, int minimumPerson, int maximumPerson, boolean parkingAvailable, boolean showerAvailable, String descripton, LocalDateTime startTime, LocalDateTime endTime, boolean active, boolean del) {
+        this.name = name;
+        this.size = size;
+        this.address = address;
+        this.minimumPerson = minimumPerson;
+        this.maximumPerson = maximumPerson;
+        this.parkingAvailable = parkingAvailable;
+        this.showerAvailable = showerAvailable;
+        this.descripton = descripton;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.active = active;
+        this.del = del;
+    }
 }

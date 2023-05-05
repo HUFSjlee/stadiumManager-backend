@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,5 +22,19 @@ public class StadiumAdminController {
     public ResponseEntity create(@Validated @RequestBody StadiumDto.CreateRequest request) {
         var response = stadiumService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(BaseResponse.success(response));
+    }
+    @PutMapping("/stadiums/update/{id}")
+    public Long update(@PathVariable Long id, @RequestBody StadiumDto.UpdateRequest request) {
+        return stadiumService.update(id, request);
+    }
+
+    @DeleteMapping("/stadiums/delete/{id}")
+    public StadiumDto delete(@PathVariable Long id) {
+        return stadiumService.delete(id);
+    }
+
+    @GetMapping("/stadiums/read/{id}")
+    public StadiumDto findById(@PathVariable Long id) {
+        return stadiumService.findById(id);
     }
 }
