@@ -1,26 +1,37 @@
 spring:
-  h2:
-    console:
-      enabled: true # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
-      path: /h2-console # H2 Console의 Path
+#  h2:
+#    console:
+#      enabled: true # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
+#      path: /h2-console # H2 Console의 Path
+#
+#  # Database Setting Info (Database를 H2로 사용하기 위해 H2연결 정보 입력)
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
 
-
-  # Database Setting Info (Database를 H2로 사용하기 위해 H2연결 정보 입력)
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+     driver-class-name: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://localhost:3306/sm
+     username: sm
+     password: 1234
 
-  # jpa설정
+    # jpa설정
   jpa:
+    database : mysql
     hibernate: # hibernate 사용 설정
-      ddl-auto: create #create, alter, drop, truncate
+      ddl-auto: create-drop #create, alter, drop, truncate
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
         show_sql: true
     defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
 
 
 # 로그 레벨 설정

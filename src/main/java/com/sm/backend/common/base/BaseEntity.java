@@ -1,6 +1,5 @@
 package com.sm.backend.common.base;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -24,7 +23,7 @@ public abstract class BaseEntity {
     @Column(name = "created_at", updatable = false)
     protected LocalDateTime createdAt;
 
-    @Column(name = "created_by")
+    @Column(name = "created_by", updatable = false)
     protected String createdBy;
 
     @LastModifiedDate

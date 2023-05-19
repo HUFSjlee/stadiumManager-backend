@@ -16,17 +16,16 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "reservable_stadium")
 public class ReservableStadium extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservable_stadium_id")
     private Long id;
 
+    @Column(name = "stadium_name")
+    private String name;
+
     @Column(name = "rental_price")
     private int rentalPrice;
-
-    @Column(name = "time_per_game")
-    private String timePerGame;
 
     @Column(name = "rule")
     private String rule;
@@ -37,12 +36,15 @@ public class ReservableStadium extends BaseEntity {
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
-    @Column(name = "participants_number")
-    private int participantsNumber;
-
-    @Column(name = "average_level")
-    private String averageLevel;
-
     @Column(name = "available_gender")
-    private String availableGender;
+    private char availableGender;
+
+    public void update(String name, int rentalPrice, String rule, LocalDateTime startTime, LocalDateTime endTime, char availableGender) {
+        this.name = name;
+        this.rentalPrice = rentalPrice;
+        this.rule = rule;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.availableGender = availableGender;
+    }
 }
