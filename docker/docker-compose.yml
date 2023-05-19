@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  rds:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./rds.sql:/docker-entrypoint-initdb.d/rds.sql
+    environment:
+      MYSQL_DATABASE: sm
+      MYSQL_USER: sm
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      TZ: UTC
+    command:
+      –character-set-server=utf8 –collation-server=utf8_unicode_ci

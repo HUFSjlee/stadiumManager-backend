@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 import javax.persistence.*;
 
@@ -14,9 +13,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "maneger")
-public class Manager extends BaseEntity {
+@Table(name = "manager")
+public class Manager {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "manager_id")
     private Long id;
@@ -25,7 +25,7 @@ public class Manager extends BaseEntity {
     private String name;
 
     @Column(name = "phonenumber")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "gender")
     private char gender;

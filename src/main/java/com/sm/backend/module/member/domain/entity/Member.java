@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "member")
-public class Member extends BaseEntity {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +34,11 @@ public class Member extends BaseEntity {
     private int cash;
 
     @Column(name = "birth")
-    private LocalDateTime brith;
+    private LocalDate birth;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "level")
-    private String level;
+    private Level level;
 
     @Column(name = "manner")
     private String manner;

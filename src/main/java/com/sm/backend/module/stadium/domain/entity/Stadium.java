@@ -22,7 +22,7 @@ public class Stadium extends BaseEntity {
     @Column(name = "stadium_id")
     private Long id;
 
-    @Column(name = "stadium_name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "size")
@@ -31,11 +31,15 @@ public class Stadium extends BaseEntity {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "minumum_perssonel")
-    private int minimumPerson;
+    @Column(name = "region")
+    @Enumerated(EnumType.STRING)
+    private Region region;
 
-    @Column(name = "maximum_perssonel")
-    private int maximumPerson;
+    @Column(name = "minimum_personnel")
+    private int minimumPersonnel;
+
+    @Column(name = "maximum_personnel")
+    private int maximumPersonnel;
 
     @Column(name = "parking_available")
     private boolean parkingAvailable;
@@ -44,7 +48,7 @@ public class Stadium extends BaseEntity {
     private boolean showerAvailable;
 
     @Column(name = "description")
-    private String descripton;
+    private String description;
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
@@ -55,21 +59,27 @@ public class Stadium extends BaseEntity {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "del")
-    private boolean del;
-
-    public void update(String name, int size, String address, int minimumPerson, int maximumPerson, boolean parkingAvailable, boolean showerAvailable, String descripton, LocalDateTime startTime, LocalDateTime endTime, boolean active, boolean del) {
+    public void update(String name, int size, String address, int minimumPersonnel, int maximumPersonnel, boolean parkingAvailable, boolean showerAvailable, String description, LocalDateTime startTime, LocalDateTime endTime, boolean active) {
         this.name = name;
         this.size = size;
         this.address = address;
-        this.minimumPerson = minimumPerson;
-        this.maximumPerson = maximumPerson;
+        this.minimumPersonnel = minimumPersonnel;
+        this.maximumPersonnel = maximumPersonnel;
         this.parkingAvailable = parkingAvailable;
         this.showerAvailable = showerAvailable;
-        this.descripton = descripton;
+        this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.active = active;
-        this.del = del;
+    }
+
+    public Stadium updateName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Stadium updateSize(int size) {
+        this.size = size;
+        return this;
     }
 }

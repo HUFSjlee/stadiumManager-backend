@@ -19,12 +19,12 @@ import java.time.LocalDateTime;
 public class CancelHistory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cencel_id")
+    @Column(name = "cancel_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member memberId;
+    //@ManyToOne
+    //@JoinColumn(name = "member_id")
+    private Long memberId;
     //다대일 관계라고 생각해서 ManyToOne 사용.
 
     @Column(name = "cancel_date")

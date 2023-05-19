@@ -21,19 +21,12 @@ public class AccountInfo extends BaseEntity {
     @Column(name = "account_info_id")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
-    private Member memberId;
+    @Column(name = "mem")
+    private Long memberId;
 
     @Column(name = "account_bank")
     private String accountBank;
 
     @Column(name = "account_number")
     private int accountNumber;
-
-    @Column(name = "createdAt")
-    private LocalDateTime CreatedAt;
-
-    @Column(name = "updatedAt")
-    private LocalDateTime UpdatedAt;
 }
