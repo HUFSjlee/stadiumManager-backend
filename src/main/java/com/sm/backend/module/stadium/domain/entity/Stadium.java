@@ -59,10 +59,11 @@ public class Stadium extends BaseEntity {
     @Column(name = "active")
     private boolean active;
 
-    public void update(String name, int size, String address, int minimumPersonnel, int maximumPersonnel, boolean parkingAvailable, boolean showerAvailable, String description, LocalDateTime startTime, LocalDateTime endTime, boolean active) {
+    public void update(String name, int size, String address, Region region, int minimumPersonnel, int maximumPersonnel, boolean parkingAvailable, boolean showerAvailable, String description, LocalDateTime startTime, LocalDateTime endTime, boolean active) {
         this.name = name;
         this.size = size;
         this.address = address;
+        this.region = region;
         this.minimumPersonnel = minimumPersonnel;
         this.maximumPersonnel = maximumPersonnel;
         this.parkingAvailable = parkingAvailable;

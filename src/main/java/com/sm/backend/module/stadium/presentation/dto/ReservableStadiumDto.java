@@ -53,6 +53,7 @@ public class ReservableStadiumDto {
     public static class UpdateRequest {
 
         @NotNull
+        @JsonProperty(value = "stadium_name")
         private String name;
         private int rentalPrice;
         private String rule;

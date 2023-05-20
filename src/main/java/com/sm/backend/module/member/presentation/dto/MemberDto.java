@@ -77,7 +77,7 @@ public class MemberDto {
     @Getter
     @SuperBuilder
     @AllArgsConstructor
-    public static class FindResponse extends MemberDto.BaseResponse {
+    public static class FindResponse {
         private Long id;
     }
 }

@@ -96,23 +96,27 @@ public class StadiumDto {
 
         private Region region;
 
+        @JsonProperty(value = "minimum_personnel")
         private int minimumPersonnel;
 
+        @JsonProperty(value = "maximum_personnel")
         private int maximumPersonnel;
 
-        private Boolean parkingAvailable;
+        private boolean parkingAvailable = true;
 
-        private Boolean showerAvailable;
+        private boolean showerAvailable = false;
 
         private String description;
 
+        @JsonProperty(value = "start_time")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime startTime;
 
+        @JsonProperty(value = "end_time")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime endTime;
 
-        private Boolean active;
+        private boolean active = false;
     }
 
     @Getter
