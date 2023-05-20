@@ -44,11 +44,19 @@ public class StadiumService {
     public StadiumDto.UpdateResponse update(Long id, StadiumDto.UpdateRequest request) {
         Stadium stadium = stadiumRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("해당 구장 정보가 없습니다. id= " + id));
 
-        stadium.update(request.getName(), request.getSize(),
-                request.getAddress(), request.getMinimumPersonnel(),
-                request.getMaximumPersonnel(), request.getParkingAvailable(),
-                request.getShowerAvailable(), request.getDescription(),
-                request.getStartTime(), request.getEndTime(), request.getActive());
+        stadium.update(
+                request.getName(),
+                request.getSize(),
+                request.getAddress(),
+                request.getRegion(),
+                request.getMinimumPersonnel(),
+                request.getMaximumPersonnel(),
+                request.isParkingAvailable(),
+                request.isShowerAvailable(),
+                request.getDescription(),
+                request.getStartTime(),
+                request.getEndTime(),
+                request.isActive());
         return stadiumMapper.toUpdateResponse(stadium);
     }
 
