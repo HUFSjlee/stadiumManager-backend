@@ -1,6 +1,5 @@
 package com.sm.backend.module.member.domain.entity;
 
-import com.sm.backend.common.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
