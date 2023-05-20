@@ -45,7 +45,7 @@ public class ManagerDto {
     @Getter
     @SuperBuilder
     @AllArgsConstructor
-    public static class FindResponse extends ManagerDto.BaseResponse {
+    public static class FindResponse {
         private Long id;
     }
 }
