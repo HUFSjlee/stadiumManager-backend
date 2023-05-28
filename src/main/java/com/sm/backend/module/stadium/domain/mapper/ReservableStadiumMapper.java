@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 public class ReservableStadiumMapper {
     public ReservableStadium toEntity(ReservableStadiumDto.CreateRequest request) {
         return ReservableStadium.builder()
-                .name(request.getName())
+                //.name(request.getName())
                 .rentalPrice(request.getRentalPrice())
-                .rule(request.getRule())
+                .gameRule(request.getGameRule())
                 .startTime(request.getStartTime())
                 .endTime(request.getEndTime())
                 .availableGender(request.getAvailableGender())

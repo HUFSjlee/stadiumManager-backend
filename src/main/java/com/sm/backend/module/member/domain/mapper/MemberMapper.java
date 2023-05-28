@@ -4,6 +4,8 @@ import com.sm.backend.module.member.domain.entity.Member;
 import com.sm.backend.module.member.presentation.dto.MemberDto;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 
 @Component
 public class MemberMapper {
@@ -12,12 +14,15 @@ public class MemberMapper {
                 .name(request.getName())
                 .nickName(request.getNickname())
                 .gender(request.getGender())
-                .cash(request.getCash())
                 .birth(request.getBirth())
                 .level(request.getLevel())
                 .manner(request.getManner())
                 .coupon(request.getCoupon())
                 .point(request.getPoint())
+                .createdAt(LocalDateTime.now())
+                .createdBy("SYSTEM")
+                .updatedAt(LocalDateTime.now())
+                .updatedBy("SYSTEM")
                 .build();
     }
 

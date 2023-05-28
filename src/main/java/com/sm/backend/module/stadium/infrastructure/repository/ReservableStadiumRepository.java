@@ -7,5 +7,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReservableStadiumRepository extends JpaRepository<ReservableStadium, Long> {
-    Page<ReservableStadium> searchByNameContaining(String keyword, Pageable pageable);
+    Page<ReservableStadium> searchByIdContaining(String keyword, Pageable pageable);
 }

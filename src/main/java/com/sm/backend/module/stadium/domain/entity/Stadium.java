@@ -8,6 +8,8 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -22,7 +24,10 @@ public class Stadium extends BaseEntity {
     @Column(name = "stadium_id")
     private Long id;
 
-    @Column(name = "name")
+    @OneToMany(mappedBy = "stadium", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservableStadium> reservableStadiums = new ArrayList<>();
+
+    @Column
     private String name;
 
     @Column(name = "size")
@@ -60,7 +65,6 @@ public class Stadium extends BaseEntity {
     private boolean active;
 
     public void update(String name, int size, String address, Region region, int minimumPersonnel, int maximumPersonnel, boolean parkingAvailable, boolean showerAvailable, String description, LocalDateTime startTime, LocalDateTime endTime, boolean active) {
-        this.name = name;
         this.size = size;
         this.address = address;
         this.region = region;
@@ -75,7 +79,7 @@ public class Stadium extends BaseEntity {
     }
 
     public Stadium updateName(String name) {
-        this.name = name;
+        //this.name = name;
         return this;
     }
 

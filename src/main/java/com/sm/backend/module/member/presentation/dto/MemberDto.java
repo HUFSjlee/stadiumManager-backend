@@ -27,8 +27,6 @@ public class MemberDto {
 
         private char gender;
 
-        private int cash;
-
         private LocalDate brith;
 
         private Level level;
@@ -51,8 +49,6 @@ public class MemberDto {
         private String nickname;
 
         private char gender;
-
-        private int cash;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDate birth;
