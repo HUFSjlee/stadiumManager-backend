@@ -16,17 +16,19 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "cancel_history")
-public class CancelHistory extends BaseEntity {
+public class MemberPointHistory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cancel_id")
+    @Column(name = "member_point_history_id")
     private Long id;
 
-    //@ManyToOne
-    //@JoinColumn(name = "member_id")
-    private Long memberId;
-    //다대일 관계라고 생각해서 ManyToOne 사용.
+    @Column(name = "amount")
+    private int amount;
 
-    @Column(name = "cancel_date")
-    private LocalDateTime cancelDate;
+    @Enumerated(EnumType.STRING)
+    private PointType pointType;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }

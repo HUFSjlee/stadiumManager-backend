@@ -2,6 +2,7 @@ package com.sm.backend.module.stadium.presentation.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sm.backend.module.stadium.domain.entity.Stadium;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +21,7 @@ public class ReservableStadiumDto {
         private Long id;
         private String name;
         private int rentalPrice;
-        private String rule;
+        private String gameRule;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime startTime;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -38,7 +39,7 @@ public class ReservableStadiumDto {
         @JsonProperty(value = "stadium_name")
         private String name;
         private int rentalPrice;
-        private String rule;
+        private String gameRule;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime startTime;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -56,7 +57,7 @@ public class ReservableStadiumDto {
         @JsonProperty(value = "stadium_name")
         private String name;
         private int rentalPrice;
-        private String rule;
+        private String gameRule;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime startTime;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")

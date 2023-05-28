@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -21,7 +22,16 @@ public class StadiumService {
     private final StadiumRepository stadiumRepository;
     private final StadiumMapper stadiumMapper;
 
+    // 상위 엔티티 = 1:N 관계에서 1인애들
+    // N+1 = 상위 엔티티 전체 조회 쿼리 1개 + 상위 엔티티 row 개수 만큼 자식 엔티티 조회 = 1 + row
     public Page<Stadium> findAll(Pageable pageable) {
+        List<Stadium> stadiums = stadiumRepository.findAll(); // 전체 조회하는 쿼리 1개
+
+        // stadium(상위 엔티티) 의 row 개수만큼 자식 연관관계에 있는 테이블을 조회함
+        for (var stadium: stadiums) {
+            stadium.getReservableStadiums().forEach(it -> System.out.println("reservableStadiumId: " + it.getId()));
+        }
+
         return stadiumRepository.findAll(pageable);
     }
 

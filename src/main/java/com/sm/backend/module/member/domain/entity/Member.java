@@ -1,11 +1,16 @@
 package com.sm.backend.module.member.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sm.backend.common.base.BaseEntity;
+import com.sm.backend.module.reservation.domain.entity.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuperBuilder
 @AllArgsConstructor
@@ -13,12 +18,18 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @Table(name = "member")
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<MemberPointHistory> memberPointHistories = new ArrayList<>();
 
     @Column(name = "member_name")
     private String name;
@@ -28,9 +39,6 @@ public class Member {
 
     @Column(name = "gender")
     private char gender;
-
-    @Column(name = "cash")
-    private int cash;
 
     @Column(name = "birth")
     private LocalDate birth;

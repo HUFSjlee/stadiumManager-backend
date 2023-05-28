@@ -24,7 +24,7 @@ public class ReservableStadiumService {
     }
 
     public Page<ReservableStadium> search(String keyword, Pageable pageable) {
-        return reservableStadiumRepository.searchByNameContaining(keyword, pageable);
+        return reservableStadiumRepository.searchByIdContaining(keyword, pageable);
     }
 
     public ReservableStadiumDto.FindResponse findById(Long id) {
@@ -47,7 +47,7 @@ public class ReservableStadiumService {
         reservableStadium.update(
                 request.getName(),
                 request.getRentalPrice(),
-                request.getRule(),
+                request.getGameRule(),
                 request.getStartTime(),
                 request.getEndTime(),
                 request.getAvailableGender());
