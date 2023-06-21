@@ -1,8 +1,6 @@
 package com.sm.backend.module.reservation.presentation.dto;
 
-import com.sm.backend.module.member.domain.entity.Member;
 import com.sm.backend.module.reservation.domain.entity.ReservationStatus;
-import com.sm.backend.module.stadium.domain.entity.ReservableStadium;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -52,5 +50,25 @@ public class ReservationDto {
         private Long id;
         private Long memberId;
         private Long reservableStadiumId;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CancelReservationResponse {
+        private Long id;
+        //private boolean success;
+        //private String message;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CancelReservationRequest {
+        private Long id;
+       // private boolean success;
+        //private String message;
     }
 }

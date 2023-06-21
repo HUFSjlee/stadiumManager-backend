@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "reservation")
-public class Reservation{
+public class Reservation extends BaseEntity{
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -33,4 +33,8 @@ public class Reservation{
 
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
+
+    public void update(ReservationStatus reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
 }

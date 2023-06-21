@@ -67,6 +67,7 @@ public class StadiumService {
                 request.getStartTime(),
                 request.getEndTime(),
                 request.isActive());
+
         return stadiumMapper.toUpdateResponse(stadium);
     }
 
