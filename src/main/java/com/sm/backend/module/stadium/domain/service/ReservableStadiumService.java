@@ -45,12 +45,13 @@ public class ReservableStadiumService {
         ReservableStadium reservableStadium = reservableStadiumRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("해당 예약 가능한 구장 정보가 없습니다. id= " + id));
 
         reservableStadium.update(
-                request.getName(),
                 request.getRentalPrice(),
                 request.getGameRule(),
                 request.getStartTime(),
                 request.getEndTime(),
-                request.getAvailableGender());
+                request.getAvailableGender(),
+                request.getReservableStadiumStatus(),
+                request.getAvailableLevel());
         return reservableStadiumMapper.toUpdateResponse(reservableStadium);
     }
 

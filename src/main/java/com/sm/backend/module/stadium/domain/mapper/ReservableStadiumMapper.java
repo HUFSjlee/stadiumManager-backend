@@ -16,6 +16,7 @@ public class ReservableStadiumMapper {
                 .startTime(request.getStartTime())
                 .endTime(request.getEndTime())
                 .availableGender(request.getAvailableGender())
+                .availableLevel(request.getAvailableLevel())
                 .createdAt(LocalDateTime.now())
                 .createdBy("SYSTEM")
                 .updatedAt(LocalDateTime.now())

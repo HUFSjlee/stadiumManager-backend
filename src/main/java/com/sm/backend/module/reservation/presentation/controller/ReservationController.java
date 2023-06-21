@@ -1,11 +1,13 @@
 package com.sm.backend.module.reservation.presentation.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.sm.backend.common.response.BaseResponse;
 import com.sm.backend.module.member.presentation.dto.MemberDto;
 import com.sm.backend.module.reservation.domain.entity.Reservation;
 import com.sm.backend.module.reservation.presentation.dto.ReservationDto;
 import com.sm.backend.module.reservation.domain.service.ReservationService;
 import com.sm.backend.module.stadium.domain.entity.ReservableStadium;
+import com.sm.backend.module.stadium.presentation.dto.StadiumDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RequestMapping("/reservation")
+@RequestMapping("/reservations")
 @RestController
 public class ReservationController {
 
@@ -28,9 +30,15 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(BaseResponse.success(response));
     }
 
-    @GetMapping("/reserve/{id}")
+    @GetMapping("/{id}")
     public BaseResponse<ReservationDto.FindResponse> findById(@PathVariable Long id) {
         return BaseResponse.success(reservationService.findById(id));
     }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity cancelReservation(@PathVariable Long id) {
+        var cancelReservationResponse = reservationService.cancelReservation(id);
+        return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(cancelReservationResponse));
+    }
 }

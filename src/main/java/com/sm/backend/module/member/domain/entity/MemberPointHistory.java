@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "cancel_history")
+@Table(name = "member_point_history")
 public class MemberPointHistory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,7 @@ public class MemberPointHistory extends BaseEntity {
     private int amount;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "point_type")
     private PointType pointType;
 
     @ManyToOne

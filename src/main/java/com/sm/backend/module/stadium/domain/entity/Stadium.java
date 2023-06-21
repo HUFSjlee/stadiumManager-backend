@@ -1,5 +1,6 @@
 package com.sm.backend.module.stadium.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sm.backend.common.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,11 @@ public class Stadium extends BaseEntity {
     @Column(name = "stadium_id")
     private Long id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "stadium", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservableStadium> reservableStadiums = new ArrayList<>();
 
-    @Column
+    @Column(name = "name")
     private String name;
 
     @Column(name = "size")
@@ -35,10 +37,6 @@ public class Stadium extends BaseEntity {
 
     @Column(name = "address")
     private String address;
-
-    @Column(name = "region")
-    @Enumerated(EnumType.STRING)
-    private Region region;
 
     @Column(name = "minimum_personnel")
     private int minimumPersonnel;
@@ -64,7 +62,12 @@ public class Stadium extends BaseEntity {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "region")
+    @Enumerated(EnumType.STRING)
+    private Region region;
+
     public void update(String name, int size, String address, Region region, int minimumPersonnel, int maximumPersonnel, boolean parkingAvailable, boolean showerAvailable, String description, LocalDateTime startTime, LocalDateTime endTime, boolean active) {
+        this.name = name;
         this.size = size;
         this.address = address;
         this.region = region;

@@ -2,6 +2,8 @@ package com.sm.backend.module.stadium.presentation.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sm.backend.module.stadium.domain.entity.AvailableLevel;
+import com.sm.backend.module.stadium.domain.entity.ReservableStadiumStatus;
 import com.sm.backend.module.stadium.domain.entity.Stadium;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,17 +11,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class ReservableStadiumDto {
-    @Getter
     @SuperBuilder
+    @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class BaseResponse {
         private Long id;
-        private String name;
+        private Stadium stadium;
         private int rentalPrice;
         private String gameRule;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -27,6 +28,8 @@ public class ReservableStadiumDto {
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime endTime;
         private char availableGender;
+        private ReservableStadiumStatus reservableStadiumStatus;
+        private AvailableLevel availableLevel;
     }
 
     @Getter
@@ -34,10 +37,10 @@ public class ReservableStadiumDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class CreateRequest {
-
-        @NotNull
-        @JsonProperty(value = "stadium_name")
-        private String name;
+        //@NotNull
+        //@JsonProperty(value = "stadium_name")
+        //private String name;
+        private Stadium stadium;
         private int rentalPrice;
         private String gameRule;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -45,6 +48,8 @@ public class ReservableStadiumDto {
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime endTime;
         private char availableGender;
+        private ReservableStadiumStatus reservableStadiumStatus;
+        private AvailableLevel availableLevel;
     }
 
     @Getter
@@ -52,10 +57,11 @@ public class ReservableStadiumDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UpdateRequest {
-
-        @NotNull
-        @JsonProperty(value = "stadium_name")
-        private String name;
+        //@NotNull
+        //@JsonProperty(value = "stadium_name")
+        // private String name;
+        @JsonProperty(value = "stadium_id")
+        private Stadium stadium;
         private int rentalPrice;
         private String gameRule;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -63,6 +69,8 @@ public class ReservableStadiumDto {
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
         private LocalDateTime endTime;
         private char availableGender;
+        private ReservableStadiumStatus reservableStadiumStatus;
+        private AvailableLevel availableLevel;
     }
 
     @Getter

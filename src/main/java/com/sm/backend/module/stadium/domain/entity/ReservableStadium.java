@@ -1,8 +1,7 @@
 package com.sm.backend.module.stadium.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sm.backend.common.base.BaseEntity;
-import com.sm.backend.module.member.domain.entity.Member;
+import com.sm.backend.module.manager.domain.entity.Manager;
 import com.sm.backend.module.reservation.domain.entity.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +32,10 @@ public class ReservableStadium extends BaseEntity {
     @OneToMany(mappedBy = "reservableStadium", fetch = FetchType.LAZY)
     private List<Reservation> reservations = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
+
     @Column(name = "rental_price")
     private int rentalPrice;
 
@@ -48,12 +51,22 @@ public class ReservableStadium extends BaseEntity {
     @Column(name = "available_gender")
     private char availableGender;
 
-    public void update(String name, int rentalPrice, String gameRule, LocalDateTime startTime, LocalDateTime endTime, char availableGender) {
-        //this.name = name;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "reservable_stadium_status")
+    private ReservableStadiumStatus reservableStadiumStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "available_level")
+    private AvailableLevel availableLevel;
+
+    public void update(int rentalPrice, String gameRule, LocalDateTime startTime, LocalDateTime endTime, char availableGender, ReservableStadiumStatus reservableStadiumStatus, AvailableLevel availableLevel) {
+        //this.stadium = stadium;
         this.rentalPrice = rentalPrice;
         this.gameRule = gameRule;
         this.startTime = startTime;
         this.endTime = endTime;
         this.availableGender = availableGender;
+        this.reservableStadiumStatus = reservableStadiumStatus;
+        this.availableLevel = availableLevel;
     }
 }

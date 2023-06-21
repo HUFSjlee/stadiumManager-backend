@@ -3,6 +3,7 @@ package com.sm.backend.module.member.presentation.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sm.backend.module.member.domain.entity.Level;
+import com.sm.backend.module.member.domain.entity.Manner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class MemberDto {
 
         private Level level;
 
-        private String manner;
+        private Manner manner;
 
         private String coupon;
 
@@ -55,7 +56,7 @@ public class MemberDto {
 
         private Level level;
 
-        private String manner;
+        private Manner manner;
 
         private String coupon;
 
