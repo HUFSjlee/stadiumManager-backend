@@ -11,7 +11,6 @@ import com.sm.backend.module.reservation.domain.entity.Reservation;
 import com.sm.backend.module.reservation.domain.entity.ReservationStatus;
 import com.sm.backend.module.reservation.infrastructure.ReservationRepository;
 import com.sm.backend.module.reservation.presentation.dto.ReservationDto;
-import com.sm.backend.module.stadium.domain.entity.AvailableLevel;
 import com.sm.backend.module.stadium.domain.entity.ReservableStadium;
 import com.sm.backend.module.stadium.infrastructure.repository.ReservableStadiumRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +35,9 @@ public class ReservationService {
     public ReservationDto.CreateResponse reserve(ReservationDto.CreateRequest request) {
 
         Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new NotFoundResourceException("Member not found"));
-        log.info("{} 멤버가 존재합니다 //보통 한글로 적지 않는다.", member.getId());
+        log.info("{} Member exists.", member.getId());
         ReservableStadium reservableStadium = reservableStadiumRepository.findById(request.getReservableStadiumId()).orElseThrow(() -> new NotFoundResourceException("Reservable stadium not found"));
+        log.info("{} ReservableStadium exists.", reservableStadium.getId());
 
         Reservation reservation = Reservation.builder()
                 .member(member)
@@ -61,13 +61,35 @@ public class ReservationService {
             throw new ImpossibleReservationException("Not enough point.");
         }
 
-        /**이미 내가 해당 구장을 예약을 했을 때
+        int remainingPoint = point - rentalPrice;
+
+        //member = member.toBuilder().point(remainingPoint).build();
+
+        Member updatedMember = Member.builder()
+                .id(member.getId())
+                .reservations(member.getReservations())
+                .memberPointHistories(member.getMemberPointHistories())
+                .name(member.getName())
+                .nickName(member.getNickName())
+                .gender(member.getGender())
+                .birth(member.getBirth())
+                .level(member.getLevel())
+                .manner(member.getManner())
+                .coupon(member.getCoupon())
+                .point(remainingPoint)
+                .build();
+
+        memberRepository.save(updatedMember);
+
+
+
+
+    /**이미 내가 해당 구장을 예약을 했을 때
          *1. memberId와 reservableStadiumId를 findByIds 로 조회.
          * */
         // 쿼리문 => select reservation_id from reservation where member_id = ? and reservable_stadium_id = ?
-        boolean reservation2 = reservationRepository.existsByMemberIdAndReservableStadiumId(reservation.getMember().getId(), reservation.getReservableStadium().getId());
-
-        if (reservation2) {
+        boolean existMemberReservableStadiumId = reservationRepository.existsByMemberIdAndReservableStadiumId(reservation.getMember().getId(), reservation.getReservableStadium().getId());
+        if (existMemberReservableStadiumId) {
             throw new ImpossibleReservationException("Already registered");
         }
 
@@ -79,6 +101,8 @@ public class ReservationService {
         var count = reservationRepository.findByReservationStadiumId(request.getReservableStadiumId());
         var reservationStadium = reservableStadiumRepository.findById(request.getReservableStadiumId())
                 .orElseThrow(() -> new NotFoundResourceException());
+        log.info("{} ReservationStadium exists.", reservationStadium.getId());
+
         var maximumPersonnel = reservationStadium.getStadium().getMaximumPersonnel();
 
         if (count >= maximumPersonnel) {
@@ -91,20 +115,31 @@ public class ReservationService {
          * 2. 예약 가능한 구장의 예약 가능한 티어 정보를 가져와야함.
          * 3. 1,2를 비교해서 예약 가능한 티어 범위가 아니라면 예약 불가능.
          * */
-        Level level = reservation.getMember().getLevel();
-        AvailableLevel availableLevel = reservation.getReservableStadium().getAvailableLevel();
-
-        //ordinal 말고 다른 방식으로 고쳐보기.
-        if(level.ordinal() > availableLevel.ordinal()) {
-            throw new ImpossibleReservationException("Reservation not allowed for this level");
-        }
+//        Level memberLevel = reservation.getMember().getLevel();
+//        Level availableLevel = reservation.getReservableStadium().getLevel();
+//
+//        if (memberLevel.compareTo(availableLevel) > 0) {
+//            throw new ImpossibleReservationException("Reservation not allowed for this level");
+//        }
 
         var reservedEntity = reservationRepository.save(reservation);
 
         return ReservationDto.CreateResponse.builder().id(reservedEntity.getId()).build();
     }
-    //1. 검증 로직은 됐는데, 예약할 때 포인트 차감 같은 것 추가하기.
-    //2. 예약 수정.
+    @Transactional
+    public ReservationDto.UpdateResponse update(Long id, ReservationDto.UpdateRequest request) {
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("해당 예약 내역이 없습니다. id= " + id));
+        log.info("{} reservation exists",reservation.getId());
+
+        reservation.update(reservation.getMember(),reservation.getReservableStadium(),reservation.getReservationStatus());
+
+        return ReservationDto.UpdateResponse.builder()
+                .reservableStadiumId(reservation.getReservableStadium().getId())
+                .memberId(reservation.getMember().getId())
+                .reservationStatus(reservation.getReservationStatus())
+                .build();
+    }
+
 
     /** 예약 취소 메서드
      * 1. 예약되어 있는 reservationId 가져오기.
@@ -114,8 +149,10 @@ public class ReservationService {
      * 3. 예약 정보가 존재하고 RESERVATION 상태가 맞다면 CANCELED 상태로 변경.
      * 4. updatedAt, updatedBy 상태 변경?
      */
+    @Transactional
     public ReservationDto.CancelReservationResponse cancelReservation(Long id) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("Not found Reservation"));
+        log.info("{} reservation exists.", reservation.getId());
 
         //예약 상태가 RESERVED 가 아니라면 예외.
         var reservationStatus = reservation.getReservationStatus();
@@ -124,17 +161,18 @@ public class ReservationService {
         }
 
         reservation.update(ReservationStatus.CANCELED);
-        //var canceledReservationEntity = reservationRepository.save(reservation);
+        var canceledReservationEntity = reservationRepository.save(reservation);
 
         return ReservationDto.CancelReservationResponse.builder()
-                //.id(canceledReservationEntity.getId())
-                //.success(true)
-                //.message("Reservation has been canceled.")
+                .id(canceledReservationEntity.getId())
+                .success(true)
+                .message("Reservation has been canceled.")
                 .build();
     }
 
     public ReservationDto.FindResponse findById(Long id) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("예약 정보가 없습니다."));
+        log.info("{} reservation exists.", reservation.getId());
 
         if (reservation == null) {
             throw new NotFoundResourceException("예약 정보가 없습니다.");

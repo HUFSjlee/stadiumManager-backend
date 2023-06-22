@@ -51,7 +51,7 @@ public class ReservableStadiumService {
                 request.getEndTime(),
                 request.getAvailableGender(),
                 request.getReservableStadiumStatus(),
-                request.getAvailableLevel());
+                request.getLevel());
         return reservableStadiumMapper.toUpdateResponse(reservableStadium);
     }
 

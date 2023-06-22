@@ -41,4 +41,12 @@ public class ReservationController {
         var cancelReservationResponse = reservationService.cancelReservation(id);
         return ResponseEntity.status(HttpStatus.OK).body(BaseResponse.success(cancelReservationResponse));
     }
+
+    @PutMapping("/{id}")
+    public BaseResponse<ReservationDto.UpdateResponse> update(
+            @PathVariable Long id,
+            @Validated @RequestBody ReservationDto.UpdateRequest request
+    ) {
+        return BaseResponse.success(reservationService.update(id, request));
+    }
 }
