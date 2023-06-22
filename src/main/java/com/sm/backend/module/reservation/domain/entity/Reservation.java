@@ -37,4 +37,9 @@ public class Reservation extends BaseEntity{
     public void update(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
+    public void update(Member member, ReservableStadium reservableStadium, ReservationStatus reservationStatus) {
+        this.member = member;
+        this.reservableStadium = reservableStadium;
+        this.reservationStatus = reservationStatus;
+    }
 }

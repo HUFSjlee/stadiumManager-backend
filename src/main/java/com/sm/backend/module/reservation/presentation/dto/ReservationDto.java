@@ -58,8 +58,8 @@ public class ReservationDto {
     @NoArgsConstructor
     public static class CancelReservationResponse {
         private Long id;
-        //private boolean success;
-        //private String message;
+        private boolean success;
+        private String message;
     }
 
     @Getter
@@ -68,7 +68,32 @@ public class ReservationDto {
     @NoArgsConstructor
     public static class CancelReservationRequest {
         private Long id;
-       // private boolean success;
-        //private String message;
+        private boolean success;
+        private String message;
     }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class UpdateRequest {
+        @NotNull
+        private Long reservableStadiumId;
+        @NotNull
+        private Long memberId;
+        private ReservationStatus reservationStatus;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class UpdateResponse {
+        @NotNull
+        private Long reservableStadiumId;
+        @NotNull
+        private Long memberId;
+        private ReservationStatus reservationStatus;
+    }
+
 }
