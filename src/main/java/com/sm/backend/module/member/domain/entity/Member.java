@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,13 @@ public class Member extends BaseEntity {
     private String coupon;
 
     @Column(name = "point")
-    private int point;
+    private BigDecimal point;
 
+    public BigDecimal getPoint() {
+        return point;
+    }
+
+    public void updatePoint(BigDecimal remainingPoint) {
+        this.point = remainingPoint;
+    }
 }

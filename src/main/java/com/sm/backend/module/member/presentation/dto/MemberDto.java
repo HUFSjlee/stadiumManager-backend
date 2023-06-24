@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class MemberDto {
@@ -36,7 +37,7 @@ public class MemberDto {
 
         private String coupon;
 
-        private int point;
+        private BigDecimal point;
     }
 
     @Getter
@@ -60,7 +61,7 @@ public class MemberDto {
 
         private String coupon;
 
-        private int point;
+        private BigDecimal point;
     }
 
     @Getter

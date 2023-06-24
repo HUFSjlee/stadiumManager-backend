@@ -56,16 +56,11 @@ public class ReservableStadium extends BaseEntity {
     @Column(name = "reservable_stadium_status")
     private ReservableStadiumStatus reservableStadiumStatus;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "available_level")
-//    private AvailableLevel availableLevel;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "available_level")
     private Level level;
 
     public void update(int rentalPrice, String gameRule, LocalDateTime startTime, LocalDateTime endTime, char availableGender, ReservableStadiumStatus reservableStadiumStatus, Level level) {
-        //this.stadium = stadium;
         this.rentalPrice = rentalPrice;
         this.gameRule = gameRule;
         this.startTime = startTime;
