@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Slf4j
@@ -55,34 +56,33 @@ public class ReservationService {
          * 2. 예약 비용(rental price)가 얼마인지 알아야함.
          * 3. 포인트가 예약 비용보다 적으면 예외 발생.
          * */
-        int point = reservation.getMember().getPoint();
-        int rentalPrice = reservation.getReservableStadium().getRentalPrice();
-        if (point < rentalPrice) {
-            throw new ImpossibleReservationException("Not enough point.");
+
+        BigDecimal point = new BigDecimal(String.valueOf(reservation.getMember().getPoint()));
+        BigDecimal rentalPrice = new BigDecimal(reservation.getReservableStadium().getRentalPrice());
+
+        if (point.compareTo(rentalPrice) < 0) {
+            throw new ImpossibleReservationException("Not enough point. Recharge your points.");
         }
 
-        int remainingPoint = point - rentalPrice;
+        BigDecimal remainingPoint = point.subtract(rentalPrice);
 
-        //member = member.toBuilder().point(remainingPoint).build();
+        member.updatePoint(remainingPoint);
 
-        Member updatedMember = Member.builder()
-                .id(member.getId())
-                .reservations(member.getReservations())
-                .memberPointHistories(member.getMemberPointHistories())
-                .name(member.getName())
-                .nickName(member.getNickName())
-                .gender(member.getGender())
-                .birth(member.getBirth())
-                .level(member.getLevel())
-                .manner(member.getManner())
-                .coupon(member.getCoupon())
-                .point(remainingPoint)
-                .build();
-
-        memberRepository.save(updatedMember);
-
-
-
+//        Member updatedMember = Member.builder()
+//                .id(member.getId())
+//                .reservations(member.getReservations())
+//                .memberPointHistories(member.getMemberPointHistories())
+//                .name(member.getName())
+//                .nickName(member.getNickName())
+//                .gender(member.getGender())
+//                .birth(member.getBirth())
+//                .level(member.getLevel())
+//                .manner(member.getManner())
+//                .coupon(member.getCoupon())
+//                .point(remainingPoint)
+//                .build();
+//
+//        memberRepository.save(updatedMember);
 
     /**이미 내가 해당 구장을 예약을 했을 때
          *1. memberId와 reservableStadiumId를 findByIds 로 조회.
@@ -115,17 +115,19 @@ public class ReservationService {
          * 2. 예약 가능한 구장의 예약 가능한 티어 정보를 가져와야함.
          * 3. 1,2를 비교해서 예약 가능한 티어 범위가 아니라면 예약 불가능.
          * */
-//        Level memberLevel = reservation.getMember().getLevel();
-//        Level availableLevel = reservation.getReservableStadium().getLevel();
-//
-//        if (memberLevel.compareTo(availableLevel) > 0) {
-//            throw new ImpossibleReservationException("Reservation not allowed for this level");
-//        }
+
+        Level memberLevel = reservation.getMember().getLevel();
+        Level availableLevel = reservation.getReservableStadium().getLevel();
+
+        if(memberLevel.getLevelPoint() > availableLevel.getLevelPoint()) {
+            throw new ImpossibleReservationException("Reservation not allowed for this level");
+        }
 
         var reservedEntity = reservationRepository.save(reservation);
 
         return ReservationDto.CreateResponse.builder().id(reservedEntity.getId()).build();
     }
+
     @Transactional
     public ReservationDto.UpdateResponse update(Long id, ReservationDto.UpdateRequest request) {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("해당 예약 내역이 없습니다. id= " + id));

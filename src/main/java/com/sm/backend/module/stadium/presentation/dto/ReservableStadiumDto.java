@@ -3,7 +3,6 @@ package com.sm.backend.module.stadium.presentation.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sm.backend.module.member.domain.entity.Level;
-import com.sm.backend.module.stadium.domain.entity.AvailableLevel;
 import com.sm.backend.module.stadium.domain.entity.ReservableStadiumStatus;
 import com.sm.backend.module.stadium.domain.entity.Stadium;
 import lombok.AllArgsConstructor;
