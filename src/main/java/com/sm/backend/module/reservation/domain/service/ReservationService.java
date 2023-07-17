@@ -123,6 +123,9 @@ public class ReservationService {
             throw new ImpossibleReservationException("Reservation not allowed for this level");
         }
 
+        //get도 좋지만, 비교 문구 말고 compareTo() 같은 함수 호출 같은걸로도 비교해볼수 없을까?
+        //검색 키워드 => comparable, comparator (자바 기본인데 검색 후 알아보고 적용해보기)
+
         var reservedEntity = reservationRepository.save(reservation);
 
         return ReservationDto.CreateResponse.builder().id(reservedEntity.getId()).build();

@@ -10,7 +10,9 @@ spring:
 #    driver-class-name: org.h2.Driver
 #    username: sa
 #    password:
-
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
   datasource:
      driver-class-name: com.mysql.cj.jdbc.Driver
      url: jdbc:mysql://localhost:3306/sm
