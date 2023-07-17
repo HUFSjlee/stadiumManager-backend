@@ -27,5 +27,4 @@ public class MemberController {
     public BaseResponse<MemberDto.FindResponse> findById(@PathVariable Long id) {
         return BaseResponse.success(memberService.findById(id));
     }
-
 }
