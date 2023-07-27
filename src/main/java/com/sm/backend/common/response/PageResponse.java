@@ -8,6 +8,8 @@ public class PageResponse<T> {
 
     private Integer total; // 전체 요소 수
 
+    private String totalCount; // 행안부 전체 요소 수
+
     private boolean hasNext; // 다음 페이지 여부
 
     private List<T> items;
@@ -22,6 +24,9 @@ public class PageResponse<T> {
 
     public void setPage(Integer total) {
         this.total = total;
+    }
+    public void setPage(String totalCount) {
+        this.totalCount = totalCount;
     }
 
     public void setItems(List<T> items) {

@@ -1,4 +1,4 @@
-package com.sm.backend.module.kakao.domain.service.dto;
+package com.sm.backend.module.address.domain.service.dto;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Location {
+public class SearchAddress {
     @SerializedName("documents")
     private List<Document> documents;
 
