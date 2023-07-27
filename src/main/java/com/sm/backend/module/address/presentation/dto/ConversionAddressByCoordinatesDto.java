@@ -1,12 +1,11 @@
-package com.sm.backend.module.kakao.presentation.dto;
+package com.sm.backend.module.address.presentation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class AddressDto {
-
+public class ConversionAddressByCoordinatesDto {
     @Getter
     @Builder
     @AllArgsConstructor

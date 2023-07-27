@@ -1,16 +1,18 @@
-package com.sm.backend.module.kakao.presentation.dto;
+package com.sm.backend.module.address.presentation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class CoordinateDto {
+public class ConversionCoordinatesSystemDto {
+
     @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Response {
-        private String regionType;
+        private Double x;
+        private Double y;
     }
 }

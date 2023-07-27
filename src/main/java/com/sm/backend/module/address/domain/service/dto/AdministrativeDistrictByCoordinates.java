@@ -1,4 +1,4 @@
-package com.sm.backend.module.kakao.domain.service.dto;
+package com.sm.backend.module.address.domain.service.dto;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coordinate {
+public class AdministrativeDistrictByCoordinates {
 
     @SerializedName("meta")
     private Meta meta;
