@@ -23,7 +23,7 @@
  - 예약시 구장의 상세 주소 확인을 위한 **카카오 로컬 API** 적용
 
 ### 기술 스택
- - Back-end : Java11, Spring Boot 2.7.11, Spring Data JPA, MVC, Retrofit, Gradle
+ - Back-End : Java11, Spring Boot 2.7.11, Spring Data JPA, MVC, Retrofit, Gradle
  - Database : MySQL8.0, Docker
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git(+Git Flow)
