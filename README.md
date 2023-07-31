@@ -23,24 +23,34 @@
  - 예약시 구장의 상세 주소 확인을 위한 **카카오 로컬 API** 적용
 
 ### 기술 스택
- - Back-end : Java11, Spring Boot 2.7.11, Spring Data JPA, MVC, Gradle
+ - Back-end : Java11, Spring Boot 2.7.11, Spring Data JPA, MVC, Retrofit, Gradle
  - Database : MySQL8.0, Docker
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git(+Git Flow)
 
-### 개발 이슈
- - 왜 이렇게 했으며, 무엇을 해결하려고 했는지?
- - 패키지 구조 DDD --> 왜 이런 패키지 구조로 작성했는지, 각 패키지 안에 클래스 구조(어떤 클래스)는 어떻게 되어있는지
-   
+### 개발 이슈  
  - DDD(Domain-Driven Design) Layered Architecture 적용
-   - 각 도메인에 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
+    - 각 도메인에 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
      
  - JPA N+1 문제
-   - 
- - ExceptionHandler -> AOP
+    - FetchJoin을 활용하여 문제를 개선했습니다. 
+ - 공통 예외 처리
+   - @ExceptionHandler 적용
+       - 각 클래스에서 발생하는 예외를 처리할 수 있는 Exception Handler를 추가
+    - AOP
+       - 모든 클래스에서 발생하는 예외를 처리하기 위해 사용
+    - GlobalExceptionHandler 클래스에서 @RestControllerAdvice 어노테이션 사용
+       - 개발자가 작성한 Custom Exception을 공통으로 처리하기 위해 사용하였습니다.
  - Filter, Interceptor
- - 외부 API 사용 방법
+ - 외부 API (카카오 로컬 API) 적용 방법
+   - OkHttp 라이브러리와 Retrofit 라이브러리
+    - Annotation 사용을 통해 가독성 측면에서 이점을 가질 수 있고, 클라이언트 <-> 서버간에 Http 통신을 위해 사용했습니다.
+
  - memberId, reservableStadiumId 병합 컬럼 JPA 쿼리 메소드
+
+
+ - 왜 이렇게 했으며, 무엇을 해결하려고 했는지?
+ - 패키지 구조 DDD --> 왜 이런 패키지 구조로 작성했는지, 각 패키지 안에 클래스 구조(어떤 클래스)는 어떻게 되어있는지
  - 동시성처리(redis) (x)
  - Cloud : AWS(EC2,S3,RDS,,,)
    
