@@ -30,17 +30,16 @@
 
 ### 개발 이슈  
  - DDD(Domain-Driven Design) Layered Architecture 적용
-    - 각 도메인에 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
-     
+    - 각 도메인별로 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
  - JPA N+1 문제
     - FetchJoin을 활용하여 문제를 개선했습니다. 
  - 공통 예외 처리
    - @ExceptionHandler 적용
-       - 각 클래스에서 발생하는 예외를 처리할 수 있는 Exception Handler를 추가
-    - AOP
-       - 모든 클래스에서 발생하는 예외를 처리하기 위해 사용
-    - GlobalExceptionHandler 클래스에서 @RestControllerAdvice 어노테이션 사용
-       - 개발자가 작성한 Custom Exception을 공통으로 처리하기 위해 사용하였습니다.
+      - 각 클래스에서 발생하는 예외를 처리할 수 있는 Exception Handler를 추가
+   - AOP
+      - 모든 클래스에서 발생하는 예외를 처리하기 위해 사용
+   - GlobalExceptionHandler 클래스에서 @RestControllerAdvice 어노테이션 사용
+      - 개발자가 작성한 Custom Exception을 공통으로 처리하기 위해 사용하였습니다.
  - Filter, Interceptor
  - 외부 API (카카오 로컬 API) 적용 방법
    - OkHttp 라이브러리와 Retrofit 라이브러리
