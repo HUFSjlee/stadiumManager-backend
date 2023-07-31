@@ -25,12 +25,18 @@
 ### 기술 스택
  - Back-end : Java11, Spring Boot 2.7.11, Spring Data JPA, MVC, Gradle
  - Database : MySQL8.0, Docker
+ - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git(+Git Flow)
 
 ### 개발 이슈
  - 왜 이렇게 했으며, 무엇을 해결하려고 했는지?
  - 패키지 구조 DDD --> 왜 이런 패키지 구조로 작성했는지, 각 패키지 안에 클래스 구조(어떤 클래스)는 어떻게 되어있는지
+   
+ - DDD(Domain-Driven Design) Layered Architecture 적용
+   - 각 도메인에 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
+     
  - JPA N+1 문제
+   - 
  - ExceptionHandler -> AOP
  - Filter, Interceptor
  - 외부 API 사용 방법
