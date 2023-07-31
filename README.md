@@ -34,6 +34,7 @@
  - ExceptionHandler -> AOP
  - Filter, Interceptor
  - 외부 API 사용 방법
+ - memberId, reservableStadiumId 병합 컬럼 JPA 쿼리 메소드
  - 동시성처리(redis) (x)
  - Cloud : AWS(EC2,S3,RDS,,,)
    
