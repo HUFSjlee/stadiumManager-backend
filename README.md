@@ -29,7 +29,7 @@
 
 ### 개발 이슈  
  - Layered Architecture 적용
-    - 각 도메인별로 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
+    - 각 도메인별 관심사를 집중시키기 위해 도메인별로 presentation - domain - infrastructure 3 계층 구조로 나누었습니다.
  - JPA N+1 문제
     - FetchJoin을 활용하여 문제를 개선했습니다. 
  - 공통 예외 처리
