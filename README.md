@@ -27,6 +27,10 @@
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git
 
+### 서비스 구조
+![임시 아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/5b8123cb-5295-485d-b8a6-17db49fc8ad8)
+
+
 ### 프로젝트 진행 중 이슈
 
 ### JPA N+1
