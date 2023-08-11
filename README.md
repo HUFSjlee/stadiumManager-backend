@@ -25,16 +25,13 @@
  - Back-End : Java11, Spring Boot 2.7.11, Spring Data JPA, MVC, Retrofit, Gradle
  - Database : MySQL8.0, Docker
  - REST API Documentation : Swagger, Asciidoc
- - Tools : IntelliJ, Git(+Git Flow)
+ - Tools : IntelliJ, Git
 
-### 프로젝트 진행 중 이슈 (왜 이렇게 했으며, 무엇을 해결하려고 했는지?)
+### 프로젝트 진행 중 이슈
 
 ### JPA N+1
-
-이게 무엇이며, 코드 어떤 부분에서 이슈가 있었는가?(어떤 조회API를 개발할 때 발생했었는데 어떻게 해결하려고 노력하였는지.) (Q. 이 방법으로는 해결할 생각은 안해봤나? / Q. 다른 방법을 시도할 생각은 해보았는가?)
-
-- ‘fetchType = Eager’ → ‘fetchType = Lazy’로 변경했습니다.
-- FetchJoin을 활용하여 문제를 개선했습니다.
+- ‘fetchType = Eager’ → ‘fetchType = Lazy’로 변경
+- FetchJoin을 활용하여 문제를 개선
 
 ### RESPONSE
 
