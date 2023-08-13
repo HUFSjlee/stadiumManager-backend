@@ -27,9 +27,14 @@
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git
 
+### 패키지 구조
+
+- 도메인형 구조를 선택
+  - 어떤 도메인들이 사용되고 있는지를 한눈에 파악할 수 있다는 점이 장점이라 생각되어 선택
+  - 도메인 패키지 아래에 [Presentation-Domain-Infra 형식의 LayeredArchitecture](https://martinfowler.com/bliki/PresentationDomainDataLayering.html) 적용
+
 ### 서비스 구조
 ![임시 아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/5b8123cb-5295-485d-b8a6-17db49fc8ad8)
-
 
 ### 프로젝트 진행 중 이슈
 
