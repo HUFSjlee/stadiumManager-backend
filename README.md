@@ -34,7 +34,7 @@
   - 도메인 패키지 아래에 [Presentation-Domain-Infra 형식의 LayeredArchitecture](https://martinfowler.com/bliki/PresentationDomainDataLayering.html) 적용
 
 ### 서비스 구조
-![임시 아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/5b8123cb-5295-485d-b8a6-17db49fc8ad8)
+![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
 
 ### 프로젝트 진행 중 이슈
 
