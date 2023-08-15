@@ -110,7 +110,7 @@
 - 멤버(A)가 구장(B)를 예약 했다고 가정했을 때, 멤버(A)가 구장(B)을 중복으로 예약하는 것을 방지해야합니다.
 - ‘`existsByMemberIdAndReservableStadiumId`’ 와 같은 쿼리메소드를 만들어서 처리했습니다.
 
-### 첫 Retrofit 사용 (webflux와 webclient)
+### 외부 서비스와의 통신을 위한 Retrofit 사용 (webflux와 webclient)
 
 - 카카오 로컬 API를 사용할 때, 서버와 클라이언트 간 HTTP 통신을 위해 Retrofit 라이브러리를 사용했습니다.
 - 서버와 클라이언트의 통신을 위한 라이브러리 사용은 처음이었는데, Okhttp를 라이브러리 사용으로 인터페이스를 통해 더 편하고 간결한 장점이 있어서 채택하게 되었습니다.
