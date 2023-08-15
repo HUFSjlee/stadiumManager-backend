@@ -39,17 +39,17 @@
 
 ### 프로젝트 진행 중 이슈
 
-### JPA N+1
+### JPA N+1 문제
 - ‘fetchType = Eager’ → ‘fetchType = Lazy’로 변경
 - FetchJoin을 활용하여 문제를 개선
 
-### RESPONSE
+### RESPONSE 관리
 
 - 공통 응답 코드 BaseResponse 클래스에서 관리
 - 일관된 응답 형식을 위한 응답 스펙 클래스 정의
 - 클래스 내 필드는 code(응답 코드) / msg(응답 메세지) / result(응답 결과) / timestamp(응답 시간)를 포함
 
-### EXCEPTION
+### EXCEPTION 공통 처리
 
 - @ExceptionHandler 적용
     - 각 클래스에서 발생하는 예외를 처리할 수 있는 Exception Handler 사용
@@ -60,6 +60,16 @@
 
 - 관계형 데이터베이스의 사용으로 N:M관계로 만들어두었던 테이블을 해결해야 했습니다.
 - 문제 해결을 위해 중간 테이블을 Entity로 만들고 @OneToMany, @ManyToOne 어노테이션을 활용하여 1:N 과 N:1 의 관계로 풀어냈습니다.
+
+### 카카오 로컬(Local) API 적용
+
+- 외부 API를 사용해 구장의 위치 정보(주소)를 검색할 수 있습니다.
+- Kakao developers 에서 제공하는 요청과 응답을 양식에 맞게 작성하고, 응답으로 필요한 필드는 dto클래스로 만들었습니다.
+
+### 외부 API 사용 시, 의존성 문제
+- 외부 API와 관련 된 필드를 가지고 있는 ConversionCoordinatesSystem 과 같은 class는 어떤 패키지에 위치해야 하는걸까?
+- 고민 끝에, domain 패키지에 넣기로 결정
+- 이유는 infrastructure에 위치하게 되면 domain -> infrastructure 형식의 의존성 방향을 나타내는데, 이렇게 되면 infrastructure가 DB통신, 외부 통신등의 세부 구현 기술이 변경될 때 domain 패키지도 변경이 일어나기 때문 
 
 ### Filter와 Interceptor
 
@@ -100,25 +110,15 @@
 - 멤버(A)가 구장(B)를 예약 했다고 가정했을 때, 멤버(A)가 구장(B)을 중복으로 예약하는 것을 방지해야합니다.
 - ‘`existsByMemberIdAndReservableStadiumId`’ 와 같은 쿼리메소드를 만들어서 처리했습니다.
 
-### 카카오 로컬(Local) API 적용
-
-- 외부 API를 사용해 구장의 위치 정보(주소)를 검색할 수 있습니다.
-- Kakao developers 에서 제공하는 요청과 응답을 양식에 맞게 작성하고, 응답으로 필요한 필드는 dto클래스로 만들었습니다.
-
-### Retrofit
+### 첫 Retrofit 사용 (webflux와 webclient)
 
 - 카카오 로컬 API를 사용할 때, 서버와 클라이언트 간 HTTP 통신을 위해 Retrofit 라이브러리를 사용했습니다.
-- 서버와 클라이언트의 통신을 위한 라이브러리 사용은 처음이었는데, Okhttp를 라이브러리 사용으로 더 편하고 빠른 장점이 있어서 채택하게 되었습니다.
-- RetrofitAPI 인터페이스 생성
-    - 사용할 메소드를 정의하고 Server API에 맞는 @Header 정보를 작성
-- kakaoLocalApi() 메소드 정의
-    - Retrofit 인스턴스 생성
-        - 카카오의 baseUrl 등록
-        - .addConverterFactory(GsonConverterFactory.create) → JSON을 변환해줄 Gson 변환기 등록
-- @GET (Http Get 요청)
-    - EndPoint 작성
-- 반환 타입
-    - call<객체타입>
+- 서버와 클라이언트의 통신을 위한 라이브러리 사용은 처음이었는데, Okhttp를 라이브러리 사용으로 인터페이스를 통해 더 편하고 간결한 장점이 있어서 채택하게 되었습니다.
+
+### 만약 서비스에서 카카오 로컬 API가 동작하지 않는 이슈가 발생한다면?
+- 이에 대해 궁금증을 가지고 알아보던 중, Fallback에 대해서 알게 되었습니다.
+- 행안부 등 다른 외부 API를 추가하고 카카오 로컬 API가 동작하지 않을 때 행안부 API로 대체될 수 있도록 로직을 작성해야 할 것으로 보입니다.
+
 
 
 
