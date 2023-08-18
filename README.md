@@ -108,7 +108,7 @@
 ### JPA 쿼리 메소드
 
 - 멤버(A)가 구장(B)를 예약 했다고 가정했을 때, 멤버(A)가 구장(B)을 중복으로 예약하는 것을 방지해야합니다.
-- ‘`existsByMemberIdAndReservableStadiumId`’ 와 같은 쿼리메소드를 만들어서 처리했습니다.
+- ‘`existsByMemberIdAndReservableStadiumId`’ 쿼리메소드를 만들어서 처리했습니다.
 
 ### 외부 서비스와의 통신을 위한 Retrofit 사용 (webflux와 webclient)
 
