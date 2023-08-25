@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 개발자가 작성한 'Custom Exception'을 공통으로 처리하기 위함
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<BaseResponse> businessException(BusinessException e) {
         log.error("BusinessException occurred: {}", e.getMessage(), e);
@@ -22,7 +21,6 @@ public class GlobalExceptionHandler {
 
     }
 
-    //Custom Exception을 '제외한' 모든 익셉션을 공통으로 처리해야 함.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseResponse> exception(Exception e) {
         log.error("Unhandled Exception occurred: {}", e.getMessage(), e);
