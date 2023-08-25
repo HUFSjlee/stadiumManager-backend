@@ -13,7 +13,6 @@ public class KakaoClientConfig {
 
     @Bean
     public KakaoLocalApiClient kakaoLocalApi() {
-        // TODO baseUrl 은 yml 설정하고 -> properties -> 이 클래스로 호출해서 넣을 수 있도록
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())

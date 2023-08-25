@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 public class SearchAddressDto {
-
     @Getter
     @Builder
     @AllArgsConstructor
