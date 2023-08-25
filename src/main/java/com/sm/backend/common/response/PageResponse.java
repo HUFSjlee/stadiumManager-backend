@@ -4,17 +4,16 @@ import java.util.List;
 
 public class PageResponse<T> {
 
-    private Integer size; // 페이지 크기
+    private Integer size;
 
-    private Integer total; // 전체 요소 수
+    private Integer total;
 
-    private String totalCount; // 행안부 전체 요소 수
+    private String totalCount;
 
-    private boolean hasNext; // 다음 페이지 여부
+    private boolean hasNext;
 
     private List<T> items;
 
-    // ...
 
     public void setPage(Integer size, Integer total, boolean hasNext) {
         this.size = size;

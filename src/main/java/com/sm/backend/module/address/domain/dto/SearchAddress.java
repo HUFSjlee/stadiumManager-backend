@@ -1,4 +1,4 @@
-package com.sm.backend.module.address.domain.service.dto;
+package com.sm.backend.module.address.domain.dto;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.*;

@@ -1,8 +1,8 @@
 package com.sm.backend.module.address.infrastructure.client;
-import com.sm.backend.module.address.domain.service.dto.ConversionAddressByCoordinates;
-import com.sm.backend.module.address.domain.service.dto.AdministrativeDistrictByCoordinates;
-import com.sm.backend.module.address.domain.service.dto.ConversionCoordinatesSystem;
-import com.sm.backend.module.address.domain.service.dto.SearchAddress;
+import com.sm.backend.module.address.domain.dto.ConversionAddressByCoordinates;
+import com.sm.backend.module.address.domain.dto.AdministrativeDistrictByCoordinates;
+import com.sm.backend.module.address.domain.dto.ConversionCoordinatesSystem;
+import com.sm.backend.module.address.domain.dto.SearchAddress;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -10,6 +10,7 @@ public interface KakaoLocalApiClient {
 
     @Headers("Authorization: KakaoAK fb56d4f98c3638072a0e6bce28ebc23b")
     @GET("/v2/local/search/address.json")
+
     Call<SearchAddress> searchAddressList(@Query("query") String query,
                                           @Query("page") int page,
                                           @Query("size") int size);

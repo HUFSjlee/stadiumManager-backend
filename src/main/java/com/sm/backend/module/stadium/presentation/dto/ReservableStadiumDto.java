@@ -37,9 +37,7 @@ public class ReservableStadiumDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class CreateRequest {
-        //@NotNull
-        //@JsonProperty(value = "stadium_name")
-        //private String name;
+
         private Stadium stadium;
         private int rentalPrice;
         private String gameRule;
@@ -57,9 +55,7 @@ public class ReservableStadiumDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UpdateRequest {
-        //@NotNull
-        //@JsonProperty(value = "stadium_name")
-        // private String name;
+
         @JsonProperty(value = "stadium_id")
         private Stadium stadium;
         private int rentalPrice;

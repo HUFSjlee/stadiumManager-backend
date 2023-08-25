@@ -25,7 +25,6 @@ public class ReservableStadiumController {
         return reservableStadiumService.findAll(pageRequest);
     }
 
-    // TODO page, size 말고 Pageable 로 사용해보기 + 추가로 정렬 조건까지 queryString 으로 주기
     @GetMapping("/reservable-stadiums/search")
     public Page<ReservableStadium> search(@RequestParam("keyword") String keyword,
                                 @RequestParam(value = "page", defaultValue = "0") int page,
