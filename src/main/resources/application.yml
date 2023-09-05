@@ -10,9 +10,11 @@ spring:
 #    driver-class-name: org.h2.Driver
 #    username: sa
 #    password:
+
   mvc:
-    path match:
+    pathmatch:
       matching-strategy: ant_path_matcher
+
   datasource:
      driver-class-name: com.mysql.cj.jdbc.Driver
      url: jdbc:mysql://localhost:3306/sm
@@ -35,6 +37,10 @@ spring:
     init:
       mode: always
       data-locations: classpath:data.sql
+
+  redisson:
+    singleServerConfig:
+      address: "redis://localhost:6379" # Redis 서버 주소
 
 
 ## 로그 레벨 설정
