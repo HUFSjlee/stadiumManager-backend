@@ -15,6 +15,8 @@ import com.sm.backend.module.stadium.domain.entity.ReservableStadium;
 import com.sm.backend.module.stadium.infrastructure.repository.ReservableStadiumRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,64 +32,72 @@ public class ReservationService {
     private final MemberRepository memberRepository;
     private final ReservableStadiumRepository reservableStadiumRepository;
     private final ReservationRepository reservationRepository;
-
+    private final RedissonClient redissonClient;
 
     @Transactional
     public ReservationDto.CreateResponse reserve(ReservationDto.CreateRequest request) {
 
-        Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new NotFoundResourceException("Member not found"));
-        log.info("{} Member exists.", member.getId());
-        ReservableStadium reservableStadium = reservableStadiumRepository.findById(request.getReservableStadiumId()).orElseThrow(() -> new NotFoundResourceException("Reservable stadium not found"));
-        log.info("{} ReservableStadium exists.", reservableStadium.getId());
+        RLock lock = redissonClient.getLock("reservation-lock");
 
-        Reservation reservation = Reservation.builder()
-                .member(member)
-                .reservableStadium(reservableStadium)
-                .reservationStatus(ReservationStatus.RESERVED)
-                .createdAt(LocalDateTime.now())
-                .createdBy("USER")
-                .updatedAt(LocalDateTime.now())
-                .updatedBy("USER")
-                .build();
+        try {
+            lock.lock();
 
-        BigDecimal point = new BigDecimal(String.valueOf(reservation.getMember().getPoint()));
-        BigDecimal rentalPrice = new BigDecimal(reservation.getReservableStadium().getRentalPrice());
+            Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new NotFoundResourceException("Member not found"));
+            log.info("{} Member exists.", member.getId());
+            ReservableStadium reservableStadium = reservableStadiumRepository.findById(request.getReservableStadiumId()).orElseThrow(() -> new NotFoundResourceException("Reservable stadium not found"));
+            log.info("{} ReservableStadium exists.", reservableStadium.getId());
 
-        if (point.compareTo(rentalPrice) < 0) {
-            throw new ImpossibleReservationException("Not enough point. Recharge your points.");
+            Reservation reservation = Reservation.builder()
+                    .member(member)
+                    .reservableStadium(reservableStadium)
+                    .reservationStatus(ReservationStatus.RESERVED)
+                    .createdAt(LocalDateTime.now())
+                    .createdBy("USER")
+                    .updatedAt(LocalDateTime.now())
+                    .updatedBy("USER")
+                    .build();
+
+            BigDecimal point = new BigDecimal(String.valueOf(reservation.getMember().getPoint()));
+            BigDecimal rentalPrice = new BigDecimal(reservation.getReservableStadium().getRentalPrice());
+
+            if (point.compareTo(rentalPrice) < 0) {
+                throw new ImpossibleReservationException("Not enough point. Recharge your points.");
+            }
+
+            BigDecimal remainingPoint = point.subtract(rentalPrice);
+
+            member.updatePoint(remainingPoint);
+
+            boolean existMemberReservableStadiumId = reservationRepository.existsByMemberIdAndReservableStadiumId(reservation.getMember().getId(), reservation.getReservableStadium().getId());
+            if (existMemberReservableStadiumId) {
+                throw new ImpossibleReservationException("Already registered");
+            }
+
+            var count = reservationRepository.findByReservationStadiumId(request.getReservableStadiumId());
+            var reservationStadium = reservableStadiumRepository.findById(request.getReservableStadiumId())
+                    .orElseThrow(() -> new NotFoundResourceException());
+            log.info("{} ReservationStadium exists.", reservationStadium.getId());
+
+            var maximumPersonnel = reservationStadium.getStadium().getMaximumPersonnel();
+
+            if (count >= maximumPersonnel) {
+                throw new ReservationFullException();
+            }
+
+
+            Level memberLevel = reservation.getMember().getLevel();
+            Level availableLevel = reservation.getReservableStadium().getLevel();
+
+            if(memberLevel.getLevelPoint() > availableLevel.getLevelPoint()) {
+                throw new ImpossibleReservationException("Reservation not allowed for this level");
+            }
+
+            var reservedEntity = reservationRepository.save(reservation);
+
+            return ReservationDto.CreateResponse.builder().id(reservedEntity.getId()).build();
+        } finally {
+            lock.unlock();
         }
-
-        BigDecimal remainingPoint = point.subtract(rentalPrice);
-
-        member.updatePoint(remainingPoint);
-
-        boolean existMemberReservableStadiumId = reservationRepository.existsByMemberIdAndReservableStadiumId(reservation.getMember().getId(), reservation.getReservableStadium().getId());
-        if (existMemberReservableStadiumId) {
-            throw new ImpossibleReservationException("Already registered");
-        }
-
-        var count = reservationRepository.findByReservationStadiumId(request.getReservableStadiumId());
-        var reservationStadium = reservableStadiumRepository.findById(request.getReservableStadiumId())
-                .orElseThrow(() -> new NotFoundResourceException());
-        log.info("{} ReservationStadium exists.", reservationStadium.getId());
-
-        var maximumPersonnel = reservationStadium.getStadium().getMaximumPersonnel();
-
-        if (count >= maximumPersonnel) {
-            throw new ReservationFullException();
-        }
-
-
-        Level memberLevel = reservation.getMember().getLevel();
-        Level availableLevel = reservation.getReservableStadium().getLevel();
-
-        if(memberLevel.getLevelPoint() > availableLevel.getLevelPoint()) {
-            throw new ImpossibleReservationException("Reservation not allowed for this level");
-        }
-
-        var reservedEntity = reservationRepository.save(reservation);
-
-        return ReservationDto.CreateResponse.builder().id(reservedEntity.getId()).build();
     }
 
     @Transactional

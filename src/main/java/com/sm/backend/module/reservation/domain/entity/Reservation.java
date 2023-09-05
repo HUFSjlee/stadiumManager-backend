@@ -34,6 +34,10 @@ public class Reservation extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
 
+    @Version
+    private Long version;
+
+
     public void update(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
     }
