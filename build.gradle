@@ -26,19 +26,24 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'mysql:mysql-connector-java:8.0.33'
+
     //swagger
-    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+//    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+//    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
     //restdocs
     asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
     // converter-gson
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    //Redisson
+    //Redisson concurrency
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.redisson:redisson-spring-boot-starter:3.17.6'
 }
 
