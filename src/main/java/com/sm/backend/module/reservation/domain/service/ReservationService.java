@@ -22,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -39,13 +41,24 @@ public class ReservationService {
 
         RLock lock = redissonClient.getLock("reservation-lock");
 
+        /**
+         * redis-cli -> 명령어 치면 락 걸린거 확인할 수 있는데
+         * 1 ~ 30
+         * 1 부터 차근차근 디버그 찍어서 락이 생성이 되었는지 확인
+         */
+
         try {
-            lock.lock();
+            var isAvailable = lock.tryLock(10L, 2L, TimeUnit.SECONDS);
+
+            if (!isAvailable) {
+                throw new Exception();
+            }
+
+            log.info("IS LOCKED: {}", lock.isLocked());
 
             Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new NotFoundResourceException("Member not found"));
-            log.info("{} Member exists.", member.getId());
+            // 여기서 DB 통해서 조회하는지, 아니면 CACHE 통해서 조회되는지
             ReservableStadium reservableStadium = reservableStadiumRepository.findById(request.getReservableStadiumId()).orElseThrow(() -> new NotFoundResourceException("Reservable stadium not found"));
-            log.info("{} ReservableStadium exists.", reservableStadium.getId());
 
             Reservation reservation = Reservation.builder()
                     .member(member)
@@ -73,14 +86,15 @@ public class ReservationService {
                 throw new ImpossibleReservationException("Already registered");
             }
 
-            var count = reservationRepository.findByReservationStadiumId(request.getReservableStadiumId());
+            var reservations = reservationRepository.findAll();
+            log.info("{} Reservation count, memberID: {}", reservations.size(), member.getId());
             var reservationStadium = reservableStadiumRepository.findById(request.getReservableStadiumId())
                     .orElseThrow(() -> new NotFoundResourceException());
             log.info("{} ReservationStadium exists.", reservationStadium.getId());
 
             var maximumPersonnel = reservationStadium.getStadium().getMaximumPersonnel();
 
-            if (count >= maximumPersonnel) {
+            if (reservations.size() >= maximumPersonnel) {
                 throw new ReservationFullException();
             }
 
@@ -95,8 +109,13 @@ public class ReservationService {
             var reservedEntity = reservationRepository.save(reservation);
 
             return ReservationDto.CreateResponse.builder().id(reservedEntity.getId()).build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         } finally {
-            lock.unlock();
+            if (lock.isHeldByCurrentThread()) {
+                log.info("UNLOCK");
+                lock.unlock();
+            }
         }
     }
 
