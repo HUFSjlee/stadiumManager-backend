@@ -72,7 +72,18 @@ values
     ('김영상17','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
     ('김영상18','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
     ('김영상19','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
-    ('김영상20','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재');
+    ('김영상20','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상21','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상22','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상23','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상24','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상25','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상26','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상27','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상28','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상29','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재'),
+    ('김영상30','kys','남','1993-12-12','ROOKIE1','D','신규 가입 쿠폰',10000,now(),'이승재',now(),'이승재');
+
 
 insert into manager
 (manager_name, phonenumber, gender,account)
@@ -142,14 +153,14 @@ values
     (10000, '사람을 향한 거친 태클 금지', '2023-05-12 15:00:00', '2023-05-12 17:00:00', '여', 'PRO1', now(),'이승재',now(),'이승재', 'AVAILABLE', 1,10);
 
 
-INSERT INTO reservation(member_id,
-                        reservable_stadium_id,
-                        reservation_status,
-                        created_at,
-                        created_by,
-                        updated_at,
-                        updated_by)
-VALUES (1,1,'RESERVED',now(),'이승재',now(),'이승재'), (2,2,'CANCELED',now(),'이승재',now(),'이승재');
+-- INSERT INTO reservation(member_id,
+--                         reservable_stadium_id,
+--                         reservation_status,
+--                         created_at,
+--                         created_by,
+--                         updated_at,
+--                         updated_by)
+-- VALUES (1,1,'RESERVED',now(),'이승재',now(),'이승재'), (2,2,'CANCELED',now(),'이승재',now(),'이승재');
 
 INSERT INTO member_point_history(amount,
                                  point_type,
