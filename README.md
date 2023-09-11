@@ -42,7 +42,7 @@
 - ‘fetchType = Eager’ → ‘fetchType = Lazy’로 변경
 - FetchJoin을 활용하여 문제를 개선
 
-### RESPONSE 관리
+### RESPONSE 관리 방식
 
 - 공통 응답 코드 BaseResponse 클래스에서 관리
 - 일관된 응답 형식을 위한 응답 스펙 클래스 정의
