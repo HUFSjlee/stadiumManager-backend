@@ -1,5 +1,8 @@
 package com.sm.backend.facade;
 
+import com.sm.backend.module.member.domain.entity.Level;
+import com.sm.backend.module.member.domain.entity.Member;
+import com.sm.backend.module.member.infrastructure.repository.MemberRepository;
 import com.sm.backend.module.reservation.domain.entity.ReservationStatus;
 import com.sm.backend.module.reservation.domain.service.ReservationService;
 import com.sm.backend.module.reservation.infrastructure.ReservationRepository;
@@ -13,12 +16,28 @@ import org.junit.jupiter.api.Test;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/*
+Mock -> 가짜 객체
+@InjectMock
+@Mock
+
+ReservationServiceTest Class
+
+@InjectMock (service), 그외 repository -> mock
+
+reservationService.reserve 메서드 -> 테스트 코드
+ */
+
 
 @SpringBootTest
 
@@ -31,6 +50,7 @@ public class RedissonLockReservationFacadeTest {
     private ReservationRepository reservationRepository;
     @Autowired
     private ReservationService reservationService;
+
     @Autowired
     private RedissonClient redissonClient;
 
@@ -41,8 +61,9 @@ public class RedissonLockReservationFacadeTest {
     public void setUp() {
         var stadium = stadiumRepository.findById(1L).orElseThrow();
         var reservableStadium = reservableStadiumRepository.findById(1L).orElseThrow();
-        int maximumPersonnel = reservableStadium.getStadium().getMaximumPersonnel();
+        var reservation = reservationRepository.findAll();
 
+        System.out.println();
     }
 
     @AfterEach
@@ -53,17 +74,21 @@ public class RedissonLockReservationFacadeTest {
 
     @Test
     void requests_30_at_the_same_time() throws InterruptedException {
+        /*
+            given(reservationService.reserve()).then(여기에 reserve 메서드가 동작했을때 어떤 결과를 내야하는지 return type )
+         */
+
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
         CountDownLatch latch = new CountDownLatch(THREAD_COUNT);
 
+        List<Long> memberIds = List.of(11L,12L,13L,14L,15L,16L,17L,18L,19L,20L,21L,22L,23L,24L,25L,26L,27L,28L,29L,30L,31L,32L,33L,34L,35L,36L,37L,38L,39L,40L);
+
         for (int i = 0; i < THREAD_COUNT; i++) {
+            Long memberId = memberIds.get(i);
             executorService.submit(() -> {
                 try {
                     // Redisson 락을 사용하여 예약 시도
-                    reservationService.reserve(new ReservationDto.CreateRequest(1L, 3L, ReservationStatus.RESERVED));
-                } catch (Exception ex) {
-                    // 예약 실패한 경우 처리
-                    System.out.println("예약 실패");
+                    reservationService.reserve(new ReservationDto.CreateRequest(1L, memberId, ReservationStatus.RESERVED));
                 } finally {
                     latch.countDown();
                 }
@@ -72,7 +97,7 @@ public class RedissonLockReservationFacadeTest {
 
         latch.await();
 
-        // 최대 예약 가능 인원은 18명이므로, 예약된 인원은 18명과 같거나 작아야 합니다.
+        // 최대 예약 가능 인원은 18명이므로, 예약된 인원은 18명과 같거나 작아야 함
         long count = reservationRepository.count();
         assertTrue(count <= 18);
         assertEquals(18, count);
@@ -94,5 +119,4 @@ public class RedissonLockReservationFacadeTest {
          * **/
 
 //1. redis Lock 부분만 Test 코드를 짜서 내가 생각한 시나리오대로 동작을 하는지 검증.
-//2. 블로그 -> n+1 같은거 세세하게 다시 작성해보기. 좀
-// 길고 자세하게. 보기 좋게.
+//2. 블로그 -> n+1 같은거 세세하게 다시 작성해보기. 좀 길고 자세하게. 보기 좋게.
