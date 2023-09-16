@@ -48,7 +48,7 @@
 - 일관된 응답 형식을 위한 응답 스펙 클래스 정의
 - 클래스 내 필드는 code(응답 코드) / msg(응답 메세지) / result(응답 결과) / timestamp(응답 시간)를 포함
 
-### EXCEPTION 공통 처리
+### EXCEPTION 처리
 
 - @ExceptionHandler 적용
     - 각 클래스에서 발생하는 예외를 처리할 수 있는 Exception Handler 사용
