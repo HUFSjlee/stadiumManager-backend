@@ -74,9 +74,6 @@ public class RedissonLockReservationFacadeTest {
 
     @Test
     void requests_30_at_the_same_time() throws InterruptedException {
-        /*
-            given(reservationService.reserve()).then(여기에 reserve 메서드가 동작했을때 어떤 결과를 내야하는지 return type )
-         */
 
         ExecutorService executorService = Executors.newFixedThreadPool(THREAD_COUNT);
         CountDownLatch latch = new CountDownLatch(THREAD_COUNT);
@@ -87,7 +84,7 @@ public class RedissonLockReservationFacadeTest {
             Long memberId = memberIds.get(i);
             executorService.submit(() -> {
                 try {
-                    // Redisson 락을 사용하여 예약 시도
+                    // Redisson 락을 사용하여 예약 시도(실제 reserve 메서드에 락을 걸어둔 상태)
                     reservationService.reserve(new ReservationDto.CreateRequest(1L, memberId, ReservationStatus.RESERVED));
                 } finally {
                     latch.countDown();
@@ -103,20 +100,16 @@ public class RedissonLockReservationFacadeTest {
         assertEquals(18, count);
     }
 }
-
-        /**
-         * 1.(setup) 'stadium 테이블에'
-         *    'stadium_id' 가 '1'인 구장의 참여 가능한 최대 인원이 18명
-         *    -> stadium 테이블에서 stadium_id가 1인 구장의 maximum person
-         *
-         * 2(.test) 동시에 20명이 'stadium_id' 가 '1'인 구장에 예약을 시도.
-         *    -> reserve 메서드를 사용해서 20명이 동시에 예약.
-         *
-         * 3(assert). 결과 -> 18명만 예약되어야 함.
-         *
-         * t1) 락을 안걸었을 때
-         * t2) 락을 걸었을 때
-         * **/
-
-//1. redis Lock 부분만 Test 코드를 짜서 내가 생각한 시나리오대로 동작을 하는지 검증.
-//2. 블로그 -> n+1 같은거 세세하게 다시 작성해보기. 좀 길고 자세하게. 보기 좋게.
+/**
+ * 1.(setup) 'stadium 테이블에'
+ *    'stadium_id' 가 '1'인 구장의 참여 가능한 최대 인원이 18명
+ *    -> stadium 테이블에서 stadium_id가 1인 구장의 maximum person
+ *
+ * 2(.test) 동시에 20명이 'stadium_id' 가 '1'인 구장에 예약을 시도.
+ *    -> reserve 메서드를 사용해서 20명이 동시에 예약.
+ *
+ * 3(assert). 결과 -> 18명만 예약되어야 함.
+ *
+ * t1) 락을 안걸었을 때
+ * t2) 락을 걸었을 때
+ * **/

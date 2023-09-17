@@ -5,77 +5,87 @@ plugins {
     id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
-group = 'com.sm'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+bootJar.enabled = false
 
-configurations {
-    asciidoctorExt
-}
+subprojects {
 
-repositories {
-    mavenCentral()
-}
+    group = 'com.sm'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+    apply plugin: 'java'
+    // build.gradle에서 api() 를 사용하려면 java-library 사용
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    // spring boot dependency를 사용하여 사용중인 부트 버전에서 자동으로 의존성을 가져온다.
+    apply plugin: 'io.spring.dependency-management'
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'mysql:mysql-connector-java:8.0.33'
+    configurations {
+        asciidoctorExt
+    }
 
-    //swagger
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        testImplementation 'org.projectlombok:lombok:1.18.22'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'mysql:mysql-connector-java:8.0.33'
+
+        //swagger
 //    implementation 'io.springfox:springfox-boot-starter:3.0.0'
 //    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
-    //restdocs
-    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
-    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+        //restdocs
+        asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+        testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+        // Retrofit
+        implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
-    // converter-gson
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+        // converter-gson
+        implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    //Redisson concurrency
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
-    implementation 'org.redisson:redisson-spring-boot-starter:3.17.6'
-}
-
-
-ext {
-    snippetsDir = file('build/generated-snippets')
-}
-
-
-test {
-    outputs.dir snippetsDir
-}
-
-asciidoctor {
-    inputs.dir snippetsDir
-    configurations 'asciidoctorExt'
-    dependsOn test
-}
-
-bootJar {
-    dependsOn asciidoctor
-    from("${asciidoctor.outputDir}/html5") {
-        into "src/main/resources/static/docs"
+        //Redisson concurrency
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+        implementation 'org.springframework.boot:spring-boot-starter-cache'
+        implementation 'org.redisson:redisson-spring-boot-starter:3.17.6'
     }
-}
 
-task copyDocument(type: Copy) {
-    dependsOn asciidoctor
-    from file("$buildDir/docs/asciidoc")
-    into file("src/main/resources/static/docs")
-}
+    ext {
+        snippetsDir = file('build/generated-snippets')
+    }
 
-build {
-    dependsOn copyDocument
+
+    test {
+        outputs.dir snippetsDir
+    }
+
+    asciidoctor {
+        inputs.dir snippetsDir
+        configurations 'asciidoctorExt'
+        dependsOn test
+    }
+
+    bootJar {
+        dependsOn asciidoctor
+        from("${asciidoctor.outputDir}/html5") {
+            into "src/main/resources/static/docs"
+        }
+    }
+
+    task copyDocument(type: Copy) {
+        dependsOn asciidoctor
+        from file("$buildDir/docs/asciidoc")
+        into file("src/main/resources/static/docs")
+    }
+
+    build {
+        dependsOn copyDocument
+    }
 }
