@@ -31,7 +31,18 @@
 
 - 도메인형 구조를 선택
   - 어떤 도메인들이 사용되고 있는지를 한눈에 파악할 수 있다는 점이 장점이라 생각되어 선택
-  - 도메인 패키지 아래에 [Presentation-Domain-Infra 형식의 LayeredArchitecture](https://martinfowler.com/bliki/PresentationDomainDataLayering.html) 적용
+  - 도메인별 관심사 분리와 집중을 위해 도메인 패키지 아래에 [Presentation-Domain-Infra 형식의 LayeredArchitecture](https://martinfowler.com/bliki/PresentationDomainDataLayering.html) 적용
+  - common / config / module 패키지 분리
+    - common (base, exception, response)
+        - 날짜와 시간처럼 중복되어 사용되는 필드를 포함하고 있는 클래스
+        - ExceptionHandler, Custom Exception을 포함한 모든 Exception
+        - 응답 코드와 응답 내용과 관련된 Base Response와 Pagination과 관련된 Page Response 등 Response 분리
+    - config (client)
+        - 카카오 API와 같은 외부 클라이언트를 포함
+        - Filter와 Interceptor 관리
+        - Rest API Documentation 관리
+    - module (stadium / reservation / member / manager / address)
+        - 서비스 내 필요한 도메인 관리
 
 ### 서비스 구조
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
