@@ -24,14 +24,15 @@
 ### 기능 소개
  - 구장 관리 API 개발
  - 유저 정보/매니저 정보/구장 정보 API 개발
- - 예약 신청 & 취소 &변경 API 개발
+ - 예약 신청 & 취소 & 변경 API 개발
  - 예약된 매치 목록 확인 API 개발
  - 예약 시 구장의 상세 주소 제공을 위한 카카오 로컬 API 적용
 
 ### 기술 스택
  - Back-End : Java11, Spring Boot 2.7.11, MVC, Retrofit
  - ORM : Spring Data JPA
- - Database : MySQL8.0, Docker
+ - Database : MySQL8.0,
+ - Infra : Docker
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git
 
