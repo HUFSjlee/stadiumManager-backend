@@ -61,6 +61,7 @@
     - module (stadium / reservation / member / manager / address)
         - 서비스 내 필요한 도메인 관리
 
+
 ### 서비스 구조
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
 
