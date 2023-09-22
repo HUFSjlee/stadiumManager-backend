@@ -37,10 +37,9 @@
  - Tools : IntelliJ, Git
 
 ### 패키지 구조
-
 - 도메인형 구조를 선택
   - 어떤 도메인들이 사용되고 있는지를 한눈에 파악할 수 있다는 점이 장점이라 생각되어 선택
-  - 도메인별 관심사 분리와 집중을 위해 도메인 패키지 아래에 [Presentation-Domain-Infra 형식의 LayeredArchitecture](https://martinfowler.com/bliki/PresentationDomainDataLayering.html) 적용
+  - 도메인별 관심사 분리와 집중을 위해 도메인 패키지 아래에 [Presentation-Domain-Infra 형식의 Layered Architecture](https://martinfowler.com/bliki/PresentationDomainDataLayering.html) 적용
   - common / config / module 패키지 분리
     - common (base, exception, response)
         - 날짜와 시간처럼 중복되어 사용되는 필드를 포함하고 있는 클래스
