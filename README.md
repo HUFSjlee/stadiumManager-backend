@@ -60,7 +60,7 @@
     - module (stadium / reservation / member / manager / address)
         - 서비스 내 필요한 도메인 관리
 
-### Sequece
+### Sequence
 ![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
 
 
