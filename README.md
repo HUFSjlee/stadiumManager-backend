@@ -61,6 +61,8 @@
         - 서비스 내 필요한 도메인 관리
 
 ### Sequece
+![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
+
 
 ### 서비스 구조
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
