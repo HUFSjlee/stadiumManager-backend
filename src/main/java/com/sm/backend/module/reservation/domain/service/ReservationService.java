@@ -162,7 +162,6 @@ public class ReservationService {
         var findResponse = toFindResponse(reservation);
         return findResponse;
     }
-
     private ReservationDto.FindResponse toFindResponse (Reservation entity) {
         var reservableStadium = entity.getReservableStadium();
         var stadiumId = reservableStadium.getId();
