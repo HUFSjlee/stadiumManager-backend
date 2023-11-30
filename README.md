@@ -96,6 +96,17 @@
   - 경기장의 위치 정보(주소)를 검색할 기능이 필요하다고 판단하여 카카오 로컬 API를 적용
   - Kakao Developers에서 제공하는 요청과 응답 양식에 맞게 Entity를 추가
   - 응답으로 필요한 필드는 DTO 클래스로 만들어서 관리
+
+- 외부 API 사용 시, 의존성 문제
+  - 외부 API와 관련된 필드를 가지고 있는 ConversionCoordinatesSystem 클래스를 어떤 패키지에 위치시켜야 하는지에 대한 고민
+  - 고민 끝에, domain 패키지 하위에 위치시키기로 결정. 이유는?
+    - 지금까지 진행했던 패키지의 구조상, 외부 API 관련된 필드를 가지고 있는 ConversionCoordinatesSystem 클래스를 Infrastructure 패키지에 위치시키게되면, domain -> infrastructure 형식의 의존성 방향을 나타내는데
+      이렇게 되면 infrastructure가 DB 통신과 외부 통신 등의 세부 구현이 변경될 때, domain 패키지도 변경이 일어날 수 있다고 판단
+
+
+
+
+
 https://hufsjlee.github.io/categories/project/
 
 
