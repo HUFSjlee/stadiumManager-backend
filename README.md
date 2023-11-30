@@ -103,6 +103,18 @@
     - 지금까지 진행했던 패키지의 구조상, 외부 API 관련된 필드를 가지고 있는 ConversionCoordinatesSystem 클래스를 Infrastructure 패키지에 위치시키게되면, domain -> infrastructure 형식의 의존성 방향을 나타내는데
       이렇게 되면 infrastructure가 DB 통신과 외부 통신 등의 세부 구현이 변경될 때, domain 패키지도 변경이 일어날 수 있다고 판단
 
+- 외부 서비스와 통신하기 위한 방법 (with Retrofit)
+  - 카카오 로컬 API 와 같이 외부 서비스와 통신을 위해서는 어떤 라이브러리를 사용할 수 있을지에 대한 고민이 생김
+    - 주소 검색 기능을 추가하고 싶어서 카카오 로컬 API와 통신이 가능하도록 해야했다. 여러가지를 검색해 보니, WebFlux와 WebClient, Retrofit의 존재를 알게되었다.
+    - 카카오 로컬 API 적용을 위해, server와 client 간 HTTP 통신을 위해 Retrofit을 사용하기로 결정
+      
+  - Retrofit을 선택한 이유는?
+    - 간편한 API 정의가 가능하고 가독성이 좋다는 측면에서 선택
+    - OkHttp 라이브러리를 사용함으로써 인터페이스를 통해 편리하고 간결하다는 점이 장점으로 다가옴
+
+  - Retrofit을 사용해서 외부 API를 처음 적용해보고 느낀점
+    - server와 client 통신을 위해 라이브러리 사용은 처음해보았는데, OkHttp 라이브러리 인터페이스를 통해 생각보다 간편하게 사용할 수 있었다.
+
 - JPA Query Method
   - JPA Query Method란 무엇일까?
     - JPA는 ORM(Object-Relation Mapping) 기술을 구현한 것이고, 데이터베이스의 테이블을 자바 객체로 매핑하여 데이터를 조작하는 작업을 간편하게 처리할 수 있다
