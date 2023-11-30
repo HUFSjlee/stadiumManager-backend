@@ -168,6 +168,15 @@
   - 동시성 이슈를 해결한 방법
     - Redis의 Redisson 라이브러리를 사용하여, lock 점유 방식을 설정하여 동시성 이슈를 해결
 
+- 도커 (Docker)
+  - 도커에 redis 띄우기
+    - docker-compose.yml에 redis 설정 추가
+      ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/2b425341-4788-44f3-8ad3-d4a980489551)
+  - 도커 컨테이너에 등록
+      ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/3586f848-7389-4613-8d72-7a83d66020bf)
+
+
+
 
 
 https://hufsjlee.github.io/categories/project/
