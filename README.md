@@ -84,6 +84,10 @@
     - @RestControllerAdvice, GlobalExceptionHandler 클래스를 만들고, 클래스 내 적절한 예외를 처리하기 위해 만든 Custom Exception을 공통으로 처리    
 프로젝트 진행 중 이슈는 개인 블로그에 기록하였습니다.
 
+- 관계형 데이터베이스(RDBMS) N:M(다대다) 문제
+  - 관계형 데이터베이스의 사용으로 N:M 관계에 있던 두 테이블을 N:1/1:N 으로 해결하길 원함.
+  - 문제 해결을 위해 N:M 관계에 있는 두 테이블 사이에 중간 테이블을 하나 두어 Entity로 만들고, Entity의 필드에 @OneToMany, @ManyToOne 어노테이션(annotation)을 사용하여 N:M 관계를 풀어냄
+
 https://hufsjlee.github.io/categories/project/
 
 
