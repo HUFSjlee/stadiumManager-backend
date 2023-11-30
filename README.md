@@ -78,7 +78,10 @@
   - 일관된 응답 형식을 위한 응답 스펙 클래스 정의
   - 클래스 내 필드는 code(응답 코드) / msg(응답 메세지) / result(응답 결과) / timestamp(응답 시간)을 포함
  
-    
+- 예외처리
+  - 발생하는 예외를 공통으로 처리하기 위해 적용한 방식
+    - @ExceptionHandler 적용, 각 클래스에서 발생하는 예외를 처리할 수 있는 ExceptionHandler 사용
+    - @RestControllerAdvice, GlobalExceptionHandler 클래스를 만들고, 클래스 내 적절한 예외를 처리하기 위해 만든 Custom Exception을 공통으로 처리    
 프로젝트 진행 중 이슈는 개인 블로그에 기록하였습니다.
 
 https://hufsjlee.github.io/categories/project/
