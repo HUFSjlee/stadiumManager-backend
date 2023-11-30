@@ -68,6 +68,12 @@
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
 
 ### 프로젝트 진행 중 이슈
+
+- JPA N+1 문제 
+  - 'fetchType = Eager' -> 'fetchType = Lazy' 변경
+  - FetchJoin을 활용하여 문제를 개선하였습니다.
+ 
+    
 프로젝트 진행 중 이슈는 개인 블로그에 기록하였습니다.
 
 https://hufsjlee.github.io/categories/project/
