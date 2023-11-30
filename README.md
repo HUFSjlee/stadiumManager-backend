@@ -87,6 +87,10 @@
 - 관계형 데이터베이스(RDBMS) N:M(다대다) 문제
   - 관계형 데이터베이스의 사용으로 N:M 관계에 있던 두 테이블을 N:1/1:N 으로 해결하길 원함.
   - 문제 해결을 위해 N:M 관계에 있는 두 테이블 사이에 중간 테이블을 하나 두어 Entity로 만들고, Entity의 필드에 @OneToMany, @ManyToOne 어노테이션(annotation)을 사용하여 N:M 관계를 풀어냄
+ 
+- API 문서화 도구 Swagger의 오류 문제 (~ing)
+  - 프로젝트 내 예약 기능 부분에 동시성 처리를 위해 redis 관련 의존성을 추가했더니 예상치 못한 오류 로그를 만남
+  - 우선 동시성 처리가 중요하기 때문에 테스트 코드를 작성하고 테스트를 통과하는지 확인 후에 다시 Swagger를 필요로 할 때, 이 오류 해결 예정
 
 https://hufsjlee.github.io/categories/project/
 
