@@ -67,16 +67,19 @@
 ### 서비스 구조
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
 
+
 ### 프로젝트 진행 중 이슈
 
 - JPA N+1 문제 
   - 'fetchType = Eager' -> 'fetchType = Lazy' 변경
   - FetchJoin을 활용하여 문제를 개선하였습니다.
+
  
 - Response 관리
   - 공통 응답 코드를 BaseResponse 클래스에서 관리
   - 일관된 응답 형식을 위한 응답 스펙 클래스 정의
   - 클래스 내 필드는 code(응답 코드) / msg(응답 메세지) / result(응답 결과) / timestamp(응답 시간)을 포함
+
  
 - 예외처리
   - 발생하는 예외를 공통으로 처리하기 위해 적용한 방식
@@ -84,18 +87,22 @@
     - @RestControllerAdvice, GlobalExceptionHandler 클래스를 만들고, 클래스 내 적절한 예외를 처리하기 위해 만든 Custom Exception을 공통으로 처리    
 프로젝트 진행 중 이슈는 개인 블로그에 기록하였습니다.
 
+
 - 관계형 데이터베이스(RDBMS) N:M(다대다) 문제
   - 관계형 데이터베이스의 사용으로 N:M 관계에 있던 두 테이블을 N:1/1:N 으로 해결하길 원함.
   - 문제 해결을 위해 N:M 관계에 있는 두 테이블 사이에 중간 테이블을 하나 두어 Entity로 만들고, Entity의 필드에 @OneToMany, @ManyToOne 어노테이션(annotation)을 사용하여 N:M 관계를 풀어냄
+
  
 - API 문서화 도구 Swagger의 오류 문제 (~ing)
   - 프로젝트 내 예약 기능 부분에 동시성 처리를 위해 redis 관련 의존성을 추가했더니 예상치 못한 오류 로그를 만남
   - 우선 동시성 처리가 중요하기 때문에 테스트 코드를 작성하고 테스트를 통과하는지 확인 후에 다시 Swagger를 필요로 할 때, 이 오류 해결 예정
 
+
 - 카카오 로컬 API 적용 (외부 API)
   - 경기장의 위치 정보(주소)를 검색할 기능이 필요하다고 판단하여 카카오 로컬 API를 적용
   - Kakao Developers에서 제공하는 요청과 응답 양식에 맞게 Entity를 추가
   - 응답으로 필요한 필드는 DTO 클래스로 만들어서 관리
+
 
 - 외부 API 사용 시, 의존성 문제
   - 외부 API와 관련된 필드를 가지고 있는 ConversionCoordinatesSystem 클래스를 어떤 패키지에 위치시켜야 하는지에 대한 고민
@@ -103,10 +110,12 @@
     - 지금까지 진행했던 패키지의 구조상, 외부 API 관련된 필드를 가지고 있는 ConversionCoordinatesSystem 클래스를 Infrastructure 패키지에 위치시키게되면, domain -> infrastructure 형식의 의존성 방향을 나타내는데
       이렇게 되면 infrastructure가 DB 통신과 외부 통신 등의 세부 구현이 변경될 때, domain 패키지도 변경이 일어날 수 있다고 판단
 
+
 - 외부 서비스와 통신하기 위한 방법 (with Retrofit)
   - 카카오 로컬 API 와 같이 외부 서비스와 통신을 위해서는 어떤 라이브러리를 사용할 수 있을지에 대한 고민이 생김
     - 주소 검색 기능을 추가하고 싶어서 카카오 로컬 API와 통신이 가능하도록 해야했다. 여러가지를 검색해 보니, WebFlux와 WebClient, Retrofit의 존재를 알게되었다.
     - 카카오 로컬 API 적용을 위해, server와 client 간 HTTP 통신을 위해 Retrofit을 사용하기로 결정
+
       
   - Retrofit을 선택한 이유는?
     - 간편한 API 정의가 가능하고 가독성이 좋다는 측면에서 선택
@@ -114,6 +123,7 @@
 
   - Retrofit을 사용해서 외부 API를 처음 적용해보고 느낀점
     - server와 client 통신을 위해 라이브러리 사용은 처음해보았는데, OkHttp 라이브러리 인터페이스를 통해 생각보다 간편하게 사용할 수 있었다.
+
 
 - JPA Query Method
   - JPA Query Method란 무엇일까?
@@ -124,6 +134,7 @@
     - 멤버(A)가 구장(B)를 예약 했다고 가정했을 때, 멤버(A)가 구장(B)을 중복으로 예약되는 것을 방지해야 했다.
     - 그래서, 멤버의 ID와 예약 가능한 구장의 ID가 이미 존재하는지를 확인하기 위해서 ‘existByMemberIdAndReservableStadiumId’ 라는 쿼리 메서드를 정의하여 처리
 
+
 - Fallback 이란..?
   - 외부 API가 예상치 못한 오류로 인해 동작하지 않는다면?
     - 프로젝트 내에 주소 검색을 기능을 위해 카카오 로컬 API를 적용했는데, 만약 카카오 API가 먹통이 된다면 어떻게 이를 처리할 수 있을지에 대한 생각을 해보게 됨
@@ -131,6 +142,7 @@
 
   - 해결 방안
     - 행정안전부 API 등, 다른 외부 API를 추가하고 카카오 로컬 API가 동작하지 않을 때에는 행정안전부 API로 대체될 수 있도록 로직을 작성해야 한다는 사실을 알게됨
+
 
 - Filter 적용
   - Filter를 적용한 이유는?
@@ -143,6 +155,7 @@
       - destroy()
     - @Component
       -Filter를 적용하기 위해서 스프링빈(Spring Bean) 으로 등록하여 사용
+
 
 - Interceptor 적용
    - Interceptor 사용 이유?
@@ -161,6 +174,7 @@
        - addInterceptors()
          - 애플리케이션 내에 인터셉터를 등록, addPathPatterns() -> 인터셉터를 호출하는 주소와 경로 추가
 
+
 - 동시성 이슈에 대한 고민
   - 여러 프로세스 및 스레드가 동시에 동일한 데이터 (공유 데이터) 를 조작할 때 타이밍이나 접근 순서에 따라 예상했던 결과가 달라질 수 있는 상황을 의미.
   - 이 프로젝트에서도 여러 사람이 하나의 구장에 동시에 예약을 시도했을 때, 동시성 관련 이슈가 발생할 수 있다는 점을 알게됨
@@ -168,12 +182,19 @@
   - 동시성 이슈를 해결한 방법
     - Redis의 Redisson 라이브러리를 사용하여, lock 점유 방식을 설정하여 동시성 이슈를 해결
 
+
 - 도커 (Docker)
   - 도커에 redis 띄우기
     - docker-compose.yml에 redis 설정 추가
+      
       ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/2b425341-4788-44f3-8ad3-d4a980489551)
+      
   - 도커 컨테이너에 등록
+    
       ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/3586f848-7389-4613-8d72-7a83d66020bf)
+
+
+
 
 
 - 테스트 코드 작성
