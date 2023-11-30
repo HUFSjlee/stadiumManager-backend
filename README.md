@@ -73,6 +73,11 @@
   - 'fetchType = Eager' -> 'fetchType = Lazy' 변경
   - FetchJoin을 활용하여 문제를 개선하였습니다.
  
+- Response 관리
+  - 공통 응답 코드를 BaseResponse 클래스에서 관리
+  - 일관된 응답 형식을 위한 응답 스펙 클래스 정의
+  - 클래스 내 필드는 code(응답 코드) / msg(응답 메세지) / result(응답 결과) / timestamp(응답 시간)을 포함
+ 
     
 프로젝트 진행 중 이슈는 개인 블로그에 기록하였습니다.
 
