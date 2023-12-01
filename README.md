@@ -215,7 +215,7 @@
 
 
 
-https://hufsjlee.github.io/categories/project/
+블로그 링크 : https://hufsjlee.github.io/categories/project/
 
 
 ## ERD 
