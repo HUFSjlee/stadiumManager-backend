@@ -6,7 +6,23 @@
 
 ### 기획 배경  
  - 풋살 또는 축구 매치 진행할 때, 인원 모집과 장비를 챙겨야 하는 번거로움이 있습니다. 이런 번거로움 없이 개인 장비만 챙겨 매치에 참여할 수 있는 풋살 예약 서비스입니다.
- - 해당 서비스에 등록된 매치를 예약할 수 있는 REST API 서버를 개발하였습니다.  
+ - 해당 서비스에 등록된 매치를 예약할 수 있는 REST API 서버를 개발하였습니다.
+
+### 기술 스택
+ - Back-End : Java11, Spring Boot 2.7.11, MVC, Retrofit
+ - ORM : Spring Data JPA
+ - Database : MySQL8.0,
+ - Infra : Docker
+ - REST API Documentation : Swagger, Asciidoc
+ - Tools : IntelliJ, Git
+
+### 서비스 구조 (아키텍처)
+![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
+
+
+### Sequence (동시성 처리 시, 시퀀스)
+![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
+
 
 ### 프로젝트 목표
  - 매치 진행을 위해 이용 가능한 구장을 서비스에 등록하여 유저에게 제공합니다.
@@ -31,13 +47,7 @@
  - 예약된 매치 목록 확인 API 개발
  - 예약 시 구장의 상세 주소 제공을 위한 카카오 로컬 API 적용
 
-### 기술 스택
- - Back-End : Java11, Spring Boot 2.7.11, MVC, Retrofit
- - ORM : Spring Data JPA
- - Database : MySQL8.0,
- - Infra : Docker
- - REST API Documentation : Swagger, Asciidoc
- - Tools : IntelliJ, Git
+
 
 ### 패키지 구조
 - 도메인형 구조를 선택
@@ -64,8 +74,7 @@
 ![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
 
 
-### 서비스 구조
-![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
+
 
 
 ### 프로젝트 진행 중 이슈
