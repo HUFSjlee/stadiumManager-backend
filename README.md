@@ -40,6 +40,7 @@
  - 구장의 주소 검색
    - 카카오 로컬 API 사용으로 구장 주소를 제공합니다.
      
+     
 ### 기능 소개
  - 구장 관리 API 개발
  - 유저 정보/매니저 정보/구장 정보 API 개발
@@ -69,11 +70,6 @@
           
     - module (stadium / reservation / member / manager / address)
         - 서비스 내 필요한 도메인 관리
-
-### Sequence
-![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
-
-
 
 
 
