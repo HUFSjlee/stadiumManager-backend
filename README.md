@@ -1,4 +1,4 @@
-**<div align="center"> :two_men_holding_hands:Stadium Manager!(풋살&축구 소셜 매치 서비스):soccer: </div>**
+**<div align="center"> ⚽ Stadium Manager!(풋살&축구 소셜 매치 서비스) 🥅 </div>**
 **<div align="center"> [Backend Server]</div>**
 2023.04 ~
 
