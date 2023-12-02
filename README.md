@@ -27,9 +27,7 @@
 
 ### ERD 
 ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/54775b8f-735d-48b5-ae2f-4d5745e6d1f2)
-
-Wiki pages : https://github.com/stadiumManager/stadium-backend/wiki/ERD   
-
+   
 
  
 
