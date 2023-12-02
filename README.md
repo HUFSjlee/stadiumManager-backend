@@ -15,6 +15,7 @@
  - Infra : Docker
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git
+ - DevOps :  AWS - EC2, RDS (진행중)
    
 
 ### 서비스 구조 (아키텍처)
