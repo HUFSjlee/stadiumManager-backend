@@ -15,6 +15,7 @@
  - Infra : Docker
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git
+   
 
 ### 서비스 구조 (아키텍처)
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
@@ -24,30 +25,10 @@
 ![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
 
 
-### 프로젝트 목표
- - 매치 진행을 위해 이용 가능한 구장을 서비스에 등록하여 유저에게 제공합니다.
- - 구장별 매치 일정을 유저가 신청 및 취소할 수 있습니다.
- - 비즈니스 로직에 따라 예약 신청 성공/실패됩니다.
-   
-   - 유저들의 레벨이 존재합니다. 매치마다 참여 가능 레벨을 설정해 두어 실력별 매치가 가능합니다. (참여 가능 레벨을 초과하였을 때는 예약이 되지 않습니다.)
-     
-   - 유저들의 캐시가 없다면 예약이 불가능합니다. 캐시가 존재한다면 예약이 성공되며 캐시가 차감됩니다.
-     
-   - 남성, 여성, 혼성 매치가 있습니다. 성별에 맞지 않은 매치는 예약이 불가능합니다.
-     
-   - 구장별 이용가능한 인원수가 초과되면 예약이 불가능합니다.
-     
- - 구장의 주소 검색
-   - 카카오 로컬 API 사용으로 구장 주소를 제공합니다.
-     
-     
-### 기능 소개
- - 구장 관리 API 개발
- - 유저 정보/매니저 정보/구장 정보 API 개발
- - 예약 신청 & 취소 & 변경 API 개발
- - 예약된 매치 목록 확인 API 개발
- - 예약 시 구장의 상세 주소 제공을 위한 카카오 로컬 API 적용
+## ERD 
+![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/54775b8f-735d-48b5-ae2f-4d5745e6d1f2)
 
+Wiki pages : https://github.com/stadiumManager/stadium-backend/wiki/ERD
 
 
 ### 패키지 구조
@@ -201,7 +182,6 @@
 
 
 
-
 - 테스트 코드 작성
   - stadium 테이블
     - stadium 테이블의 stadium_id 가 1인 구장의 ‘참여 가능한 최대 인원(maximumPersonnel)’은 18명으로 설정되어 있다. (reservable_stadium 테이블에는 stadium_id를 외래키(FK)로 가지고 있다.)
@@ -219,10 +199,30 @@
 개인 블로그 링크 : https://hufsjlee.github.io/categories/project/
 
 
-## ERD 
-![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/54775b8f-735d-48b5-ae2f-4d5745e6d1f2)
 
-Wiki pages : https://github.com/stadiumManager/stadium-backend/wiki/ERD
+### 프로젝트 목표
+ - 매치 진행을 위해 이용 가능한 구장을 서비스에 등록하여 유저에게 제공합니다.
+ - 구장별 매치 일정을 유저가 신청 및 취소할 수 있습니다.
+ - 비즈니스 로직에 따라 예약 신청 성공/실패됩니다.
+   
+   - 유저들의 레벨이 존재합니다. 매치마다 참여 가능 레벨을 설정해 두어 실력별 매치가 가능합니다. (참여 가능 레벨을 초과하였을 때는 예약이 되지 않습니다.)
+     
+   - 유저들의 캐시가 없다면 예약이 불가능합니다. 캐시가 존재한다면 예약이 성공되며 캐시가 차감됩니다.
+     
+   - 남성, 여성, 혼성 매치가 있습니다. 성별에 맞지 않은 매치는 예약이 불가능합니다.
+     
+   - 구장별 이용가능한 인원수가 초과되면 예약이 불가능합니다.
+     
+ - 구장의 주소 검색
+   - 카카오 로컬 API 사용으로 구장 주소를 제공합니다.
+     
+     
+### 기능 소개
+ - 구장 관리 API 개발
+ - 유저 정보/매니저 정보/구장 정보 API 개발
+ - 예약 신청 & 취소 & 변경 API 개발
+ - 예약된 매치 목록 확인 API 개발
+ - 예약 시 구장의 상세 주소 제공을 위한 카카오 로컬 API 적용
 
 
 
