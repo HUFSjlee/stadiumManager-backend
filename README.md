@@ -18,20 +18,20 @@
  - DevOps :  AWS - EC2, RDS (진행중)
    
 
-### 서비스 구조 (아키텍처)
+## 서비스 구조 (아키텍처)
 ![프로젝트_아키텍쳐](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/460cd781-69fc-4c5c-a4a7-a74691ce5781)
 
 
-### Sequence (동시성 처리 시, 시퀀스)
+## Sequence (동시성 처리 시, 시퀀스)
 ![시퀀스다이어그램](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/8945b8f1-e044-4171-9971-c9594f7a2bc3)
 
 
-### ERD 
+## ERD 
 ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/54775b8f-735d-48b5-ae2f-4d5745e6d1f2)
    
 
 
-### 프로젝트 진행 중 이슈
+## 프로젝트 진행 중 이슈
 
 - JPA N+1 문제 
   - 'fetchType = Eager' -> 'fetchType = Lazy' 변경
@@ -176,7 +176,7 @@
 개인 블로그 링크 : https://hufsjlee.github.io/categories/project/
 
 
-### 패키지 구조
+## 패키지 구조
 - 도메인형 구조를 선택
   
   - 어떤 도메인들이 사용되고 있는지를 한눈에 파악할 수 있다는 점이 장점이라 생각되어 선택
@@ -197,7 +197,7 @@
     - module (stadium / reservation / member / manager / address)
         - 서비스 내 필요한 도메인 관리
 
-### 프로젝트 목표
+## 프로젝트 목표
  - 매치 진행을 위해 이용 가능한 구장을 서비스에 등록하여 유저에게 제공합니다.
  - 구장별 매치 일정을 유저가 신청 및 취소할 수 있습니다.
  - 비즈니스 로직에 따라 예약 신청 성공/실패됩니다.
@@ -214,7 +214,7 @@
    - 카카오 로컬 API 사용으로 구장 주소를 제공합니다.
      
      
-### 기능 소개
+## 기능 소개
  - 구장 관리 API 개발
  - 유저 정보/매니저 정보/구장 정보 API 개발
  - 예약 신청 & 취소 & 변경 API 개발
