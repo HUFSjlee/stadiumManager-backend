@@ -11,7 +11,7 @@
 ### 기술 스택
  - Back-End : Java11, Spring Boot 2.7.11, MVC, Retrofit
  - ORM : Spring Data JPA
- - Database : MySQL8.0, Redis(redisson library)
+ - Database : MySQL8.0, Redis(Redisson library)
  - Infra : Docker
  - REST API Documentation : Swagger, Asciidoc
  - Tools : IntelliJ, Git
