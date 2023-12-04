@@ -170,7 +170,7 @@
          2. 위 1번을 진행할 때, Lock을 걸었을 때와 Lock을 걸지 않았을 때의 결과값의 차이를 알아보고자 한다.
          3. 우선 현재 프로젝트의 reservationService 내에 있는 reserve 메서드에 Lock을 설정해둔 상태이고, Lock을 걸었을 때의 기댓값을(예측값)을 18로 예측했는데 엉뚱항 결과값이 나오는 문제가 발생
          4. Member 엔티티에서 JPA 쿼리 메서드를 만들어서 사용할 수도 있었지만 첫 테스트이기 때문에 stadium_id가 1인 구장에 예약이 가능한 조건을 충족하는 member를 테스트 코드 내에 하드코딩 해두었다.
- (lock 획득 조건과 획득 시간, lease time을 수정 후, 정상 동작을 확인함)
+ **(lock 획득 조건과 획득 시간, lease time을 수정 후, 정상 동작을 확인함)**
             ![image](https://github.com/HUFSjlee/stadiumManager-backend/assets/67497759/839018d2-abc3-40cc-be91-b0a7668023ce)
 
 
