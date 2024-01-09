@@ -48,7 +48,6 @@
   - 발생하는 예외를 공통으로 처리하기 위해 적용한 방식
     - @ExceptionHandler 적용, 각 클래스에서 발생하는 예외를 처리할 수 있는 ExceptionHandler 사용
     - @RestControllerAdvice, GlobalExceptionHandler 클래스를 만들고, 클래스 내 적절한 예외를 처리하기 위해 만든 Custom Exception을 공통으로 처리    
-프로젝트 진행 중 이슈는 개인 블로그에 기록하였습니다.
 
 
 - 관계형 데이터베이스(RDBMS) N:M(다대다) 문제
