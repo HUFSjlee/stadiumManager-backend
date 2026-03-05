@@ -13,7 +13,7 @@
  - ORM : Spring Data JPA
  - Database : MySQL8.0, Redis(Redisson library)
  - Infra : Docker
- - REST API Documentation : Swagger, Asciidoc
+ - REST API Documentation : Swagger (OpenAPI)
  - Tools : IntelliJ, Git
  - DevOps :  AWS - EC2, RDS (진행중)
    
